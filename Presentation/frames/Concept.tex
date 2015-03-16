@@ -1,3 +1,4 @@
+% !TEX root = ../beamer.tex
 \begin{frame}[t]
     \frametitle{DSL}
 \end{frame}
@@ -9,36 +10,29 @@
 \begin{frame}[t]
     \frametitle{Generator}
     
-    \begin{center}   
-	    \begin{tikzpicture}
+	\begin{center}   
+	\begin{tikzpicture}[
+		>=stealth,
+		node distance = 0.75cm and 0.25cm,
+		every node/.style={minimum height = 1.75em}]
+		\node[draw] (dsl) {DSL\vphantom{Aq}};
+		\node[draw, below = of dsl] (md2model) {MD2 Model\vphantom{Aq}};
+		\draw[->] (md2model) -- node[right] {\tiny{uses}} (dsl);
 	    
-	    \draw (-0.75,0) rectangle (0.75,0.5) node[pos=.5] {DSL};
-	    
-		\draw [->] (0,-1) -- (0,-0.1);
-	    \node [right] at (0,-0.5) {\tiny{uses}};
-	    
-	    \draw (-1.5,-1.5) rectangle (1.5,-1) node[pos=.5] {MD2 Model};
-	    
-		\draw [->] (0,-1.5) -- (0,-2.4);
-		\node [right] at (0,-2) {\tiny{processed by}};
+		\node[below = of md2model, draw] (preprocessor) {Preprocessor\vphantom{Aq}};
+		\draw[->] (md2model) -- node[right] {\tiny{processed by}} (preprocessor);
 		
-		\draw (-1.5,-3) rectangle (1.5,-2.5) node[pos=.5] {Preprocessor};
+		\node[draw, below = of preprocessor] (generator) {Generator\vphantom{Aq}};
 		
-		\draw [->] (0,-3) -- (0,-3.9);
-		\node [right] at (0,-3.5) {\tiny{input for}};
-	    
-	    \draw (-1.5,-4.5) rectangle (1.5,-4) node[pos=.5] {Generator};
-	    
-	    \draw (-4,-5.5) rectangle (-0.5,-5) node[pos=.5] {map.apps source};
-	    \draw (0.5,-5.5) rectangle (4,-5) node[pos=.5] {backend source};
-	    
-	    \draw [->] (-1.5,-4.25) -- (-2.5,-4.25) -- (-2.5,-4.9);
-	    \node [left] at (-1.5,-4.1) {\tiny{generates}};
-	    \draw [->] (1.5,-4.25) -- (2.5,-4.25) -- (2.5,-4.9);
-	    \node [right] at (1.5,-4.1) {\tiny{generates}};
-	    
-	    \end{tikzpicture}
-    \end{center}
+		\draw[->] (preprocessor) -- node[right] {\tiny{input for}} (generator);
+		
+		\node[draw, below left = 0.25cm of generator] (mapapps) {map.apps source\vphantom{Aq}};
+		\node[draw, below right = 0.25cm of generator] (backend) {backend source\vphantom{Aq}};
+		
+		\draw[->] (generator) -| node[above] {\tiny{generates}} (mapapps);
+		\draw[->] (generator) -| node[above] {\tiny{generates}} (backend);
+	\end{tikzpicture}
+	\end{center}
 \end{frame}
 
 \begin{frame}[t]
