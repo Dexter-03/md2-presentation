@@ -1,0 +1,76 @@
+\begin{frame}[t]
+    \frametitle{DSL}
+\end{frame}
+
+\begin{frame}[t]
+    \frametitle{Generated Code}
+\end{frame}
+
+\begin{frame}[t]
+    \frametitle{Generator}
+    
+    \begin{center}   
+	    \begin{tikzpicture}
+	    
+	    \draw (-0.75,0) rectangle (0.75,0.5) node[pos=.5] {DSL};
+	    
+		\draw [->] (0,-1) -- (0,-0.1);
+	    \node [right] at (0,-0.5) {\tiny{uses}};
+	    
+	    \draw (-1.5,-1.5) rectangle (1.5,-1) node[pos=.5] {MD2 Model};
+	    
+		\draw [->] (0,-1.5) -- (0,-2.4);
+		\node [right] at (0,-2) {\tiny{processed by}};
+		
+		\draw (-1.5,-3) rectangle (1.5,-2.5) node[pos=.5] {Preprocessor};
+		
+		\draw [->] (0,-3) -- (0,-3.9);
+		\node [right] at (0,-3.5) {\tiny{input for}};
+	    
+	    \draw (-1.5,-4.5) rectangle (1.5,-4) node[pos=.5] {Generator};
+	    
+	    \draw (-4,-5.5) rectangle (-0.5,-5) node[pos=.5] {map.apps source};
+	    \draw (0.5,-5.5) rectangle (4,-5) node[pos=.5] {backend source};
+	    
+	    \draw [->] (-1.5,-4.25) -- (-2.5,-4.25) -- (-2.5,-4.9);
+	    \node [left] at (-1.5,-4.1) {\tiny{generates}};
+	    \draw [->] (1.5,-4.25) -- (2.5,-4.25) -- (2.5,-4.9);
+	    \node [right] at (1.5,-4.1) {\tiny{generates}};
+	    
+	    \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+\begin{frame}[t]
+    \frametitle{Deployment}
+    
+    \begin{center}   
+	    \begin{tikzpicture}
+	    
+	    \draw (-1.5,-4.5) rectangle (1.5,-4) node[pos=.5] {Generator};
+	    
+	    \draw (-4,-5.5) rectangle (-0.5,-5) node[pos=.5] {map.apps source};
+	    \draw (0.5,-5.5) rectangle (4,-5) node[pos=.5] {backend source};
+	    
+	    \draw [->] (-1.5,-4.25) -- (-2.5,-4.25) -- (-2.5,-4.9);
+	    \node [left] at (-1.5,-4.1) {\tiny{generates}};
+	    \draw [->] (1.5,-4.25) -- (2.5,-4.25) -- (2.5,-4.9);
+	    \node [right] at (1.5,-4.1) {\tiny{generates}};
+	    
+	    \draw [rounded corners] (-3.5,-7) rectangle (-1.5,-6.5) node[pos=.5] {Jetty};
+	    \draw [rounded corners] (1,-7) rectangle (4,-6.5) node[pos=.5] {Glassfish};
+	    \draw [rounded corners] (-1.5,-8.5) rectangle (1.5,-8) node[pos=.5] {Tomcat};
+	    \draw [gray] (-1.4,-9) rectangle (1.4,-8.5) node[pos=.5] {map.apps full};
+	    
+	    \draw [<->] (-1.4,-6.75) -- (0.9,-6.75);
+	    \node [above] at (-0.2,-6.75) {\tiny{communicates}};
+	    
+	    \draw [->] (-2.5,-5.5) -- (-2.5,-6.4);
+	    \node [left] at (-2.5,-6) {\tiny{deployed on}};
+	    
+	    \draw [->] (2.5,-5.5) -- (2.5,-6.4);
+	    \node [right] at (2.5,-6) {\tiny{deployed on}};
+	    
+	    \end{tikzpicture}
+    \end{center}
+\end{frame}

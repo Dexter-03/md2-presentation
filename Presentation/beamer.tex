@@ -1,0 +1,74 @@
+\documentclass{beamer}
+
+\usepackage[pantone312,english]{wwustyle}
+
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{listings}
+
+\usepackage{setspace}
+
+\setbeamertemplate{section in toc}[sections numbered] % TODO color only section number
+\setbeamercolor*{section in toc}{fg=normal text.fg}
+
+% Uncomment the following two lines if you want to prepare your document for
+% the fast mode.
+% \usetikzlibrary{external}
+% \tikzexternalize
+
+\author{MD2 Project Team}
+\title{Model-Driven Mobile Development}
+%\institutelogo{Logo on title frame}
+%\institutelogosmall{Logo on other frames}
+\subtitle{MD2 for map.apps}
+
+
+% Add a navigation bar to footline
+\setbeamertemplate{footline}{
+ \fontsize{6pt}{1pt}
+ \selectfont
+ \vskip4pt
+ \color{maincolor}
+ \rule{\textwidth}{1.2pt}\\ % horizontal line
+  \vskip2pt
+  \rule{\textwidth}{0.8pt}\\ % horizontal line
+  \vskip5pt
+  \rule{\textwidth}{1.2pt} % horizontal line
+  \vskip2pt
+  \color{black}
+ \hspace{5.1mm}
+ \insertshortauthor
+ \begin{beamercolorbox}[ht=0cm, leftskip=3ex]{section in head/foot}
+   \insertsectionnavigationhorizontal{.8\paperwidth}{}{}
+ \end{beamercolorbox}
+ \vskip1.8pt
+}
+
+
+
+\begin{document}
+
+	\begin{frame}[plain]
+	  \maketitle
+	\end{frame}
+
+    \input{frames/frame-outline}
+    
+    \section[Motivation]{Motivation}
+    \input{frames/Motivation}
+    
+    \section[Process]{Project Process Model}
+    \input{frames/Process}
+    
+    \section[Concept]{Concept}
+    \input{frames/Concept}
+    
+    \section[Cases]{Example Cases}
+    \input{frames/Cases}   
+    
+    \section[Conclusion]{Conclusion}
+    \input{frames/Summary}
+
+\end{document}
