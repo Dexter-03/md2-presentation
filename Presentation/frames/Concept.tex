@@ -158,33 +158,33 @@ invokable at "address" using POST {
     \frametitle{Generated Code}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Generator}
-    
-	\begin{center}   
-	\begin{tikzpicture}[
-		>=stealth,
-		node distance = 0.75cm and 0.25cm,
-		every node/.style={minimum height = 1.75em}]
-		\node[draw] (dsl) {DSL\vphantom{Aq}};
-		\node[draw, below = of dsl] (md2model) {\MD Model\vphantom{Aq}};
-		\draw[->] (md2model) -- node[right] {\tiny{uses}} (dsl);
-	    
-		\node[below = of md2model, draw] (preprocessor) {Preprocessor\vphantom{Aq}};
-		\draw[->] (md2model) -- node[right] {\tiny{processed by}} (preprocessor);
-		
-		\node[draw, below = of preprocessor] (generator) {Generator\vphantom{Aq}};
-		
-		\draw[->] (preprocessor) -- node[right] {\tiny{input for}} (generator);
-		
-		\node[draw, below left = 0.25cm of generator] (mapapps) {map.apps source\vphantom{Aq}};
-		\node[draw, below right = 0.25cm of generator] (backend) {backend source\vphantom{Aq}};
-		
-		\draw[->] (generator) -| node[above] {\tiny{generates}} (mapapps);
-		\draw[->] (generator) -| node[above] {\tiny{generates}} (backend);
-	\end{tikzpicture}
-	\end{center}
-\end{frame}
+%\begin{frame}
+%    \frametitle{Generator}
+%    
+%	\begin{center}   
+%	\begin{tikzpicture}[
+%		>=stealth,
+%		node distance = 0.75cm and 0.25cm,
+%		every node/.style={minimum height = 1.75em}]
+%		\node[draw] (dsl) {DSL\vphantom{Aq}};
+%		\node[draw, below = of dsl] (md2model) {\MD Model\vphantom{Aq}};
+%		\draw[->] (md2model) -- node[right] {\tiny{uses}} (dsl);
+%	    
+%		\node[below = of md2model, draw] (preprocessor) {Preprocessor\vphantom{Aq}};
+%		\draw[->] (md2model) -- node[right] {\tiny{processed by}} (preprocessor);
+%		
+%		\node[draw, below = of preprocessor] (generator) {Generator\vphantom{Aq}};
+%		
+%		\draw[->] (preprocessor) -- node[right] {\tiny{input for}} (generator);
+%		
+%		\node[draw, below left = 0.25cm of generator] (mapapps) {map.apps source\vphantom{Aq}};
+%		\node[draw, below right = 0.25cm of generator] (backend) {backend source\vphantom{Aq}};
+%		
+%		\draw[->] (generator) -| node[above] {\tiny{generates}} (mapapps);
+%		\draw[->] (generator) -| node[above] {\tiny{generates}} (backend);
+%	\end{tikzpicture}
+%	\end{center}
+%\end{frame}
 
 \begin{frame}
     \frametitle{Deployment}
