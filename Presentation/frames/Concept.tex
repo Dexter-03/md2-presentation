@@ -14,25 +14,51 @@ WorkflowElement LocationDetection
     start Mediacapturing
   }
   fires WithoutPhotoEvent {
-    start SubmitComplaint
+    start ReviewComplaint
   }
 
 WorkflowElement MediaCapturing
   fires MediacapturedEvent {
-    start SubmitComplaint
+    start ReviewComplaint
   }
 
+WorkflowElement ReviewComplaint
+  fires EndEvent {
+    end workflow
+  }
+\end{lstlisting}
+\end{minipage}
+
+\end{frame}
+
+%-----------------------------------------------------------------------------------
+
+\begin{frame}[fragile, plain]
+	\plainnumber
+	\frametitle{Workflow Specification Across Apps}
+	
+	\begin{minipage}{0.45\textwidth}
+	    		        \includegraphics[height = 7cm, trim = 10cm 0cm 10cm 0cm, clip = true]{images/wfAcrossApps}	  
+	\end{minipage}\hfill
+	\begin{minipage}{0.5\textwidth}
+\begin{lstlisting}
 App CitizenApp {
   WorkflowElements {
     LocationDetection (startable: "Start Complaint"),
-    MediaCapturing,
-    ...
+    MediaCapturing
+  }
+}
+
+App AdministrationApp {
+  WorkflowElements {
+    ReviewComplaint
   }
 }
 \end{lstlisting}
 \end{minipage}
 
 \end{frame}
+
 
 \begin{frame}[fragile]
 	\frametitle{Calling external Webservices}
@@ -68,15 +94,71 @@ App CitizenApp {
 	\end{lstlisting}
 \end{frame}
 
-\begin{frame}[t]
+
+
+%-----------------------------------------------------------------------------------
+
+\begin{frame}[plain]
+
+\plainnumber
+
+\frametitle{Implementation: WorkflowEventHandler}
+
+\begin{center}
+	\begin{tikzpicture}[
+	>=stealth,
+	wfe/.style = {draw, circle, fill=black!15!white},
+	eh/.style = {draw, minimum height = 3cm, minimum width = 3cm, fill=pantone315!30!white}
+	]
+		\node (citizen) {\includegraphics[width=0.5cm]{images/stickfigure}};
+		\node[below = 0cm of citizen] (citizenlbl) {\scriptsize Citizen};
+		
+		\node[wfe, below = of citizenlbl] (wfe1) {WFE1};
+		\node[wfe, below = of wfe1] (wfe2) {WFE2};
+		\node[eh, right = 2cm of wfe1.north east, anchor = north west] (eh) {Event Handler};
+		\node[draw, minimum width = 2cm, minimum height = 1cm, right = 2cm of eh, fill=pantone369!20!white] (be) {Backend};
+		
+		\begin{pgfonlayer}{bg}
+			\draw[fill=pantone396!10!white, draw=pantone396] ($ (wfe1.north west) + (-0.4, 0.4) $) rectangle  ($ (eh.south east) + (0.5, -0.5) $);
+		\end{pgfonlayer}
+		
+		\draw<1->[->, thick] (citizenlbl) -- node[right] {\scriptsize{\texttt{start}}} (wfe1);
+		\draw<2->[->, thick] (wfe1) -- node[above, sloped] {\scriptsize{\texttt{ID, event}}} (eh);
+		\draw<3->[->, thick] (eh.west) -- node[above, sloped] {\scriptsize{\texttt{changeWFE}}} (wfe2.north east);
+		\draw<4->[->, thick] (wfe2.east) -- node[below, sloped] {\scriptsize{\texttt{ID, event}}} (eh);
+		\draw<5->[->, thick] (eh) -- node[above] {\scriptsize{\texttt{ID, event}}} (be);
+		
+		\visible<6->{
+			\node[above right = 0.75cm and 1.5cm of citizenlbl] (admin) {\includegraphics[width=0.5cm]{images/stickfigure}};
+			\node[below = 0cm of admin] (adminlbl) {\scriptsize Admin};
+			\node[draw, fill=black!15!white, right = of admin, minimum width = 2cm, minimum height = 1cm] (looi) {LOOI};
+			\draw[->, thick] (admin) -- node[above] {\scriptsize{\texttt{show}}} (looi);
+		}
+		\draw<7->[->, thick] ($(looi.east) + (0, 0.1) $) -| node[right] {\scriptsize{\texttt{appID}}} ($(be.north) + (0.1, 0)$);
+		\draw<8->[<-, thick] ($(looi.east) + (0, -0.1) $) -| node[below left] {\scriptsize{\texttt{open issues}}} ($(be.north) + (-0.1, 0)$);
+		\visible<9->{
+			\node[wfe, below right = 0.5cm of looi] (wfe3) {WFE3};
+			\draw[->, thick] (looi) |- node[above right] {\scriptsize{\texttt{start}}} (wfe3);	
+		}
+			\begin{pgfonlayer}{bg}
+				\draw<6->[fill=pantone396!10!white, draw=pantone396] ($ (looi.north west) + (-0.4, 0.4) $) rectangle  ($ (wfe3.south east) + (0.5, -0.5) $);
+			\end{pgfonlayer}
+		
+	\end{tikzpicture}
+\end{center}
+
+\end{frame}
+
+
+\begin{frame}
     \frametitle{DSL}
 \end{frame}
 
-\begin{frame}[t]
+\begin{frame}
     \frametitle{Generated Code}
 \end{frame}
 
-\begin{frame}[t]
+\begin{frame}
     \frametitle{Generator}
     
 	\begin{center}   
