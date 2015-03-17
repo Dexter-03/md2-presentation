@@ -8,7 +8,7 @@
 		box/.style = {draw, minimum width = 3cm, minimum height = 1.1cm, align=center},
 		node distance = 1cm and 0.5cm
 		]
-		\node[box, fill=pantone312!10!white] (model) {Model};
+		\node[box, fill=pantone315!10!white] (model) {Model};
 		\node[box, below = of model] (dsl) {Domain-Specific\\Language};
 		\draw[<-] (model) -- node[right] (uses) {} (dsl);
 		\node[box, right = 1.75cm of uses] (generator) {Generator};
