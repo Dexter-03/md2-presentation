@@ -61,37 +61,37 @@ App AdministrationApp {
 
 
 \begin{frame}[fragile]
-	\frametitle{Calling external Webservices}
-	\begin{lstlisting}[basicstyle=\footnotesize]
-	externalWebService sendEmail {
-	   url "http://psmd2.uni-muenster.de:8080/SendMail/api/mail/send/"
-	   method GET
-	   queryparams (
-	     "to" : "md2@trashmail.de"
-	     "subject" : "Map.Apps E-Mail"
-	     "body" : "Dear ladies and gentlemen, this is an e-mail sent by md2 map.apps!"
-	   )
-	}
+	\frametitle{Calling External Webservices}
+\begin{lstlisting}[basicstyle=\footnotesize\ttfamily]
+externalWebService sendEmail {
+  url "http://psmd2.uni-muenster.de:8080/SendMail/api/mail/send/"
+   method GET
+   queryparams (
+     "to" : "md2@trashmail.de"
+     "subject" : "Map.Apps E-Mail"
+     "body" : "Dear ladies and gentlemen, this is an e-mail sent by md2 map.apps!"
+   )
+}
 	
-	bind action WebServiceCall sendEmail on EmailView.SendButton.onClick
-	\end{lstlisting}
+bind action WebServiceCall sendEmail on EmailView.SendButton.onClick
+\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Starting Workflows from external WS Calls}
-	\begin{lstlisting}[basicstyle=\footnotesize]
-	WorkflowElement LocationDetection (invokable)
-	  fires ...
+	\frametitle{Starting Workflows from External WS Calls}
+\begin{lstlisting}[basicstyle=\footnotesize\ttfamily]
+WorkflowElement LocationDetection (invokable)
+  fires ...
 		
-	invokable at "address" using POST {
-			set :ComplaintProvider.loc to :AddressProvider
-			:AddressProvider.myStreet
-			:AddressProvider.myStreetNo
-			:AddressProvider.myCity
-			:AddressProvider.myPostalCode
-			default :ComplaintProvider.status = "User is filling out complaint" 
-		}
-	\end{lstlisting}
+invokable at "address" using POST {
+  set :ComplaintProvider.loc to :AddressProvider
+  :AddressProvider.myStreet
+  :AddressProvider.myStreetNo
+  :AddressProvider.myCity
+  :AddressProvider.myPostalCode
+  default :ComplaintProvider.status = "User is filling out complaint" 
+}
+\end{lstlisting}
 \end{frame}
 
 
