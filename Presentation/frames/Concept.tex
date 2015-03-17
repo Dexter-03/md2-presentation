@@ -1,35 +1,36 @@
 % !TEX root = ../beamer.tex
 
-\begin{frame}
+\begin{frame}[fragile, plain]
+	\plainnumber
 	\frametitle{Workflow Specification}
 	
-	\begin{minipage}{0.4\textwidth}
-	    		        \includegraphics[height = 60mm, trim = 10cm 0cm 10cm 0cm, clip = true]{images/WorkflowSpecification.pdf}	  
-	\end{minipage}%
-	\begin{minipage}{0.6\textwidth}
-					WorkflowElement LocationDetection\\
-					fires LocationEvent \{\\
-									start Mediacapturing\\
-								\}\\
-								fires WithoutPhotoEvent \{\\
-									start SubmitComplaint\\
-								\}\\
-									
-							WorkflowElement Mediacapturing\\
-								fires MediacapturedEvent \{\\
-									start SubmitComplaint\\
-								\}\\					
-							
-							App CitizenApp \{\\
-								WorkflowElements \{\\
-		%							LocationDetection (startable: "Start Complaint"),\\
-		%							Mediacapturing,\\
-		%							SubmitComplaint,\\
-		%							...\\
-		%						\}\\
-		%						appName "Report a Deficiency"\\
-		%					\}\\
-	\end{minipage}
+	\begin{minipage}{0.45\textwidth}
+	    		        \includegraphics[height = 7cm, trim = 10cm 0cm 10cm 0cm, clip = true]{images/WorkflowSpecification.pdf}	  
+	\end{minipage}\hfill
+	\begin{minipage}{0.5\textwidth}
+\begin{lstlisting}
+WorkflowElement LocationDetection
+  fires LocationEvent {
+    start Mediacapturing
+  }
+  fires WithoutPhotoEvent {
+    start SubmitComplaint
+  }
+
+WorkflowElement MediaCapturing
+  fires MediacapturedEvent {
+    start SubmitComplaint
+  }
+
+App CitizenApp {
+  WorkflowElements {
+    LocationDetection (startable: "Start Complaint"),
+    MediaCapturing,
+    ...
+  }
+}
+\end{lstlisting}
+\end{minipage}
 
 \end{frame}
 
