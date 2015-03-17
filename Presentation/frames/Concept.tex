@@ -35,36 +35,30 @@
 	\end{center}
 \end{frame}
 
-\begin{frame}[t]
+\begin{frame}
     \frametitle{Deployment}
     
     \begin{center}   
-	    \begin{tikzpicture}
+	    \begin{tikzpicture}[
+	    >=stealth,
+	    node distance = 0.75cm and 0.25cm,
+	    big/.style = {draw, minimum width = 2.5cm, minimum height = 1.75em}
+	    ]
+	    \node[big] (generator) {Generator};
+	    \node[big, below left = of generator] (mapapps) {map.apps source\vphantom{Aq}};
+	    \node[big, below right = of generator] (backend) {backend source\vphantom{Aq}};
+	    \draw[->] (generator) -| node[above] {\tiny{generates}} (mapapps);
+	    \draw[->] (generator) -| node[above] {\tiny{generates}} (backend);
+	    \node[big, rounded corners, below = of mapapps] (jetty) {Jetty\vphantom{Aq}};
+	    \node[big, rounded corners, below = of backend] (glassfish) {Glassfish\vphantom{Aq}};
+	    \draw[->] (mapapps) -- node[left] {\tiny{deployed on}} (jetty);
+	    \draw[->] (backend) -- node[right] {\tiny{deployed on}} (glassfish);
+	    \draw[<->] (jetty) -- node[above] (communicates) {\tiny{communicates}} (glassfish);
 	    
-	    \draw (-1.5,-4.5) rectangle (1.5,-4) node[pos=.5] {Generator};
-	    
-	    \draw (-4,-5.5) rectangle (-0.5,-5) node[pos=.5] {map.apps source};
-	    \draw (0.5,-5.5) rectangle (4,-5) node[pos=.5] {backend source};
-	    
-	    \draw [->] (-1.5,-4.25) -- (-2.5,-4.25) -- (-2.5,-4.9);
-	    \node [left] at (-1.5,-4.1) {\tiny{generates}};
-	    \draw [->] (1.5,-4.25) -- (2.5,-4.25) -- (2.5,-4.9);
-	    \node [right] at (1.5,-4.1) {\tiny{generates}};
-	    
-	    \draw [rounded corners] (-3.5,-7) rectangle (-1.5,-6.5) node[pos=.5] {Jetty};
-	    \draw [rounded corners] (1,-7) rectangle (4,-6.5) node[pos=.5] {Glassfish};
-	    \draw [rounded corners] (-1.5,-8.5) rectangle (1.5,-8) node[pos=.5] {Tomcat};
-	    \draw [gray] (-1.4,-9) rectangle (1.4,-8.5) node[pos=.5] {map.apps full};
-	    
-	    \draw [<->] (-1.4,-6.75) -- (0.9,-6.75);
-	    \node [above] at (-0.2,-6.75) {\tiny{communicates}};
-	    
-	    \draw [->] (-2.5,-5.5) -- (-2.5,-6.4);
-	    \node [left] at (-2.5,-6) {\tiny{deployed on}};
-	    
-	    \draw [->] (2.5,-5.5) -- (2.5,-6.4);
-	    \node [right] at (2.5,-6) {\tiny{deployed on}};
+	    \node[big, rounded corners, below = of communicates] (tomcat) {Tomcat};
+	    \node[big, gray, below = 0cm of tomcat] {map.apps full};	    
 	    
 	    \end{tikzpicture}
     \end{center}
 \end{frame}
+
