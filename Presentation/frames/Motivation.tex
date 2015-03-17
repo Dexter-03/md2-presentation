@@ -1,25 +1,42 @@
 % !TEX root = ../beamer.tex
 
 \begin{frame}[t]
-    \frametitle{Why MD2?}
+	\frametitle{Model-Driven Software Development}
+	\begin{center}
+	\begin{tikzpicture}[
+		>=stealth,
+		box/.style = {draw, minimum width = 3cm, minimum height = 1.1cm, align=center},
+		node distance = 1cm and 0.5cm
+		]
+		\node[box, fill=pantone312!10!white] (model) {Model};
+		\node[box, below = of model] (dsl) {Domain-Specific\\Language};
+		\draw[<-] (model) -- node[right] (uses) {} (dsl);
+		\node[box, right = 1.75cm of uses] (generator) {Generator};
+		\node[box, right = of generator] (platforms) {Code for\\Platforms};
+		\draw[->] (dsl) -| (generator);
+		\draw[->] (model) -| (generator);
+		\draw[->] (generator) -- (platforms);
+	\end{tikzpicture}
+	\end{center}
+	\vfill
     
     \begin{itemize}
-       \item Cross-Platform approach
-       \item Develop a model once, for multiple mobile platforms
-       \item Decrease maintenance costs
-       \item bla blub bla
+       \item Cross-platform approach
+       \item Develop a model once, for multiple platforms
+       \item Development on a higher level of abstraction
     \end{itemize}
 \end{frame}
 
 \begin{frame}[t]
-    \frametitle{Starting base of MD2}
+    \frametitle{Starting Base of \MD}
     
     \begin{center}   
-	    \begin{tikzpicture}
-		    \draw [fill=gray!30!white] (-4,5) rectangle (4,5.5) node[pos=.5] {MD2 Model};
-		    \draw [fill=gray!10!white] (-4,4.5) rectangle (-1.3,5) node[pos=.5] {Model};
-		    \draw [fill=gray!10!white] (-1.3,4.5) rectangle (1.3,5) node[pos=.5] {View};
-		    \draw [fill=gray!10!white] (1.3,4.5) rectangle (4,5) node[pos=.5] {Controller};
+	    \begin{tikzpicture}[>=stealth]
+		{\small
+		    \draw [fill=gray!30!white] (-4,5) rectangle (4,5.5) node[pos=.5] {\MD Model};
+		    \draw [fill=gray!10!white] (-4,4.5) rectangle (-1.3,5) node[pos=.5] {Model\vphantom{Aq}};
+		    \draw [fill=gray!10!white] (-1.3,4.5) rectangle (1.3,5) node[pos=.5] {View\vphantom{Aq}};
+		    \draw [fill=gray!10!white] (1.3,4.5) rectangle (4,5) node[pos=.5] {Controller\vphantom{Aq}};
 		    
 		    \draw [->] (0,4.5) -- (0,4.3);
 		    
@@ -27,7 +44,7 @@
 		    
 		    \draw [->] (0,3.8) -- (0,3.6);
 		    
-		    \draw [fill=gray!30!white] (-4,3.1) rectangle (4,3.6) node[pos=.5] {Completed MD2 Model};
+		    \draw [fill=gray!30!white] (-4,3.1) rectangle (4,3.6) node[pos=.5] {Completed \MD Model};
 		    
 		    \draw [->] (0,3.1) -- (-2,2.8);
 		    \draw [->] (0,3.1) -- (0,2.8);
@@ -59,11 +76,10 @@
 		    
 		    \draw [<->] (-1.5,0.95) -- (-1.3,0.95); 
 		    \draw [<->] (1.5,0.95) -- (1.3,0.95);    
-		    
+		}
 	    \end{tikzpicture}
     \end{center}
-    
-{\color{gray}{\tiny{Source: MD2 Project Seminar Presentation}}}
+{\hfill\color{gray}{\tiny{Source: \MD Project Seminar Presentation}}}
 
 \end{frame}
 

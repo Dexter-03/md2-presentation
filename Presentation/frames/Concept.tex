@@ -16,7 +16,7 @@
 		node distance = 0.75cm and 0.25cm,
 		every node/.style={minimum height = 1.75em}]
 		\node[draw] (dsl) {DSL\vphantom{Aq}};
-		\node[draw, below = of dsl] (md2model) {MD2 Model\vphantom{Aq}};
+		\node[draw, below = of dsl] (md2model) {\MD Model\vphantom{Aq}};
 		\draw[->] (md2model) -- node[right] {\tiny{uses}} (dsl);
 	    
 		\node[below = of md2model, draw] (preprocessor) {Preprocessor\vphantom{Aq}};

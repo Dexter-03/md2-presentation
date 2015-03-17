@@ -5,6 +5,7 @@
 \usepackage[ngerman]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{xspace}
 
 \usetikzlibrary{calc, positioning}
 
@@ -20,11 +21,14 @@
 % \usetikzlibrary{external}
 % \tikzexternalize
 
-\author{Project Seminar MD$^2$}
+\newcommand{\MD}{MD$^2$\xspace}
+\newcommand{\mapapps}{map.apps\xspace}
+
+\author{Project Seminar \MD}
 \title{Model-Driven Mobile Development}
 %\institutelogo{Logo on title frame}
 %\institutelogosmall{Logo on other frames}
-\subtitle{MD$^2$ for map.apps}
+\subtitle{\MD for map.apps}
 
 
 % Add a navigation bar to footline
@@ -61,16 +65,16 @@
     \section[Motivation]{Motivation}
     \input{frames/Motivation}
     
-    \section[Process]{Project Process Model}
+    \section[Procedure]{Our Procedure}
     \input{frames/Process}
     
-    \section[Concept]{Concept}
+    \section[Results]{Implementation and Results}
     \input{frames/Concept}
     
-    \section[Cases]{Example Cases}
+    \section{Live Demo}
     \input{frames/Cases}   
     
-    \section[Conclusion]{Conclusion}
+    \section{Conclusion}
     \input{frames/Summary}
 
 \end{document}
