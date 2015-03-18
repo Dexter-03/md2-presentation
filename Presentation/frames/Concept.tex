@@ -115,6 +115,32 @@ App AdministrationApp {
 
 \begin{frame}[fragile]
 	\frametitle{Calling External Webservices}
+	\begin{center}
+	\begin{tikzpicture}[>=stealth,
+		box/.style={minimum width = 2cm, minimum height = 1cm}]
+		\node[box, fill=pantone396!10!white, draw=pantone396] (mapapps) {\mapapps\vphantom{Aq}};
+		\node[box, right = 2cm of mapapps, fill=pantone369!20!white, draw=pantone369] (be) {Backend\vphantom{Aq}};
+		\node[box, right = 2cm of be, fill=pantone315!20!white, draw=pantone315, align=center] (ws) {External\\Webservice\vphantom{Aq}};
+		\draw[thick, transform canvas = {yshift=0.25cm}, ->] (mapapps) -- node[above] {\footnotesize\texttt{JSON data\vphantom{Aq}}} (be);
+		\draw[thick, transform canvas = {yshift=-0.25cm}, <-] (mapapps) -- node[below] {\footnotesize\texttt{{\color{pantone390!80!black}200}/\alert{404}\vphantom{Aq}}} (be);
+		\draw[thick, transform canvas = {yshift=0.25cm}, ->] (be) -- node[above] {\footnotesize\texttt{request\vphantom{Aq}}} (ws);
+		\draw[thick, transform canvas = {yshift=-0.25cm}, <-] (be) -- node[below] {\footnotesize\texttt{response\vphantom{Aq}}} (ws);
+	\end{tikzpicture}
+	\end{center}
+	
+	\vfill
+	
+	\begin{itemize}
+		\item Backend acts as a proxy for all webservice calls
+		\item Transforms JSON-encoded object into request
+		\item (Currently) only returns status code for success or failure
+	\end{itemize}
+\end{frame}
+
+%-----------------------------------------------------------------------------------
+
+\begin{frame}[fragile]
+	\frametitle{Calling External Webservices}
 \begin{lstlisting}[basicstyle=\footnotesize\ttfamily]
 externalWebService sendEmail {
    url "http://psmd2.uni-muenster.de:8080/SendMail/api/mail/send/"
