@@ -323,6 +323,49 @@ action Location (
 
 %-----------------------------------------------------------------------------------
 
+\begin{frame}[plain]
+\frametitle{Upload Images}
+\begin{center}
+	\begin{tikzpicture}
+		\node[fill=white, draw, drop shadow] {\includegraphics[width=\textwidth]{images/deaddrop}};
+	\end{tikzpicture}
+\end{center}
+\end{frame}
+
+%-----------------------------------------------------------------------------------
+\begin{frame}[plain]
+\frametitle{Upload Images}
+\plainnumber
+\begin{center}
+\includegraphics[width=1\textwidth, trim = 0.5mm 10cm 3.3cm 0.5mm, clip = true] {images/UML-diagrams.pdf}
+\end{center}
+\end{frame}
+
+%-----------------------------------------------------------------------------------
+
+\begin{frame}[fragile]
+\frametitle{Upload Images}
+\codeheading{View Layer}
+\begin{lstlisting}[basicstyle=\footnotesize\ttfamily]
+FileUpload UploadBtn {text "Upload File"}
+UploadedImageOutput imageoutput
+\end{lstlisting}
+
+\vfill
+
+\codeheading{Controller Layer}
+\begin{lstlisting}[basicstyle=\footnotesize\ttfamily]
+main {
+  ...  
+  fileUploadConnection UploadConnection
+}
+map MediaCapturingView.UploadBtn to :ComplaintProvider.picture
+map MediaCapturingView.imageoutput to :ComplaintProvider.picture
+\end{lstlisting}
+\end{frame}
+
+%-----------------------------------------------------------------------------------
+
 \begin{frame}[fragile]
 	\frametitle{Calling External Webservices}
 	\begin{center}
@@ -414,40 +457,6 @@ invokable at "address" using POST {
 }
 \end{lstlisting}
 \end{frame}
-
-
-%-----------------------------------------------------------------------------------
-
-\begin{frame}[plain]
-\frametitle{Upload Images}
-\plainnumber
-\begin{center}
-\includegraphics[width=1\textwidth, trim = 0.5mm 10cm 3.3cm 0.5mm, clip = true] {images/UML-diagrams.pdf}
-\end{center}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Upload Images}
-\codeheading{View Layer}
-\begin{lstlisting}[basicstyle=\footnotesize\ttfamily]
-FileUpload UploadBtn {text "Upload File"}
-UploadedImageOutput imageoutput
-\end{lstlisting}
-
-\vfill
-
-\codeheading{Controller Layer}
-\begin{lstlisting}[basicstyle=\footnotesize\ttfamily]
-main {
-  ...  
-  fileUploadConnection UploadConnection
-}
-map MediaCapturingView.UploadBtn to :ComplaintProvider.picture
-map MediaCapturingView.imageoutput to :ComplaintProvider.picture
-\end{lstlisting}
-\end{frame}
-
-%-----------------------------------------------------------------------------------
 
 %\begin{frame}
 %    \frametitle{Generator}
