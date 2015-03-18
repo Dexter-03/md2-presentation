@@ -66,6 +66,49 @@
 %-----------------------------------------------------------------------------------
 
 \begin{frame}[plain]
+	\frametitle{User Stories Over Time}
+	\begin{center}
+		\begin{tikzpicture}[
+			>=stealth,x=.08cm,y=.15cm,
+			lbl/.style = {minimum height = 1cm},
+			lbl1/.style = {lbl, anchor = east},
+			lbl2/.style = {lbl, anchor = west},
+			box/.style = {draw=pantone315, fill=pantone315!50!white}		
+		]
+			\draw[dotted] (-15, 0) -- ++(5, 0);
+			\draw[->] (-10, 0) -- ++(125, 0);
+			\draw (4,0) -- ++(0,-4pt) node [below] {Dec};
+			\draw (35,0) -- ++(0,-4pt) node [below] {Jan};
+			\draw (66,0) -- ++(0,-4pt) node [below] {Feb};
+			\draw (94,0) -- ++(0,-4pt) node [below] {Mar};
+			
+			\draw[box]  (79, 1) rectangle (111, 3); \node[lbl1] at (79, 2) {\scriptsize{}Documentation and presentation};
+			\draw[box]  (79, 4) rectangle (111, 6); \node[lbl1] at (79, 5) {\scriptsize{}External systems};
+			\draw[box]  (79, 7) rectangle (111, 9); \node[lbl1] at (79, 8) {\scriptsize{}File upload};
+			
+			\draw[box] (79, 10) rectangle (96, 12); \node[lbl1] at (79, 11) {\scriptsize{}Terminate workflow};
+			\draw[box] (79, 13) rectangle (96, 15); \node[lbl1] at (79, 14) {\scriptsize{}Upgrade to Xtext 2.7.1};
+			
+			\draw[box] (67, 16) rectangle (96, 18); \node[lbl1] at (67, 17) {\scriptsize{}Location \& maps};
+			\draw[box] (50, 19) rectangle (88, 21); \node[lbl1] at (50, 20) {\scriptsize{}Communication across apps};
+			
+			\draw[box] (41, 22) rectangle (67, 24); \node[lbl1] at (41, 23) {\scriptsize{}Reuse of view elements};
+			\draw[box] (41, 25) rectangle (67, 27); \node[lbl1] at (41, 26) {\scriptsize{}Workflow};
+			\draw[box] (41, 28) rectangle (50, 30); \node[lbl1] at (41, 29) {\scriptsize{}Communication with outside world};
+			
+			\draw[box] (15, 31) rectangle (96, 33); \node[lbl1] at (15, 32) {\scriptsize{}Infrastructure}; % infrastructure
+			
+			\draw[box] (1, 34) rectangle (50, 36); \node[lbl2] at (50, 35) {\scriptsize{}DSL tests (legacy)}; %DSL tests legacy
+			\draw[box] (1, 37) rectangle (41, 39); \node[lbl2] at (41, 38) {\scriptsize{}Basic workflow}; % basic workflow
+			\draw[box] (1, 40) rectangle (15, 42); \node[lbl2] at (15, 41) {\scriptsize{}Conditionals in reference model}; % conditionals			
+			
+		\end{tikzpicture}	
+	\end{center}
+\end{frame}
+
+%-----------------------------------------------------------------------------------
+
+\begin{frame}[plain]
 	\frametitle{Bugs}
 	\plainnumber
     \begin{center}
