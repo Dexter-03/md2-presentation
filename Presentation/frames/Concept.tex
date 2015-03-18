@@ -268,10 +268,10 @@ map MediaCapturingView.imageoutput to :ComplaintProvider.picture
 	    \node[big, below = 0.05cm of generatedArtifacts] (backend) {backend};
 	    \node[big, below = 0.05cm of backend] (mapApps) {map.apps};
 	    
-	    \node[big, right = 2cm of backend] (wildfly) {Wildfly AS};
+	    \node[big, right = 2cm of backend] (glassfish) {glassfish AS};
 	    \node[big, right = 2cm of mapApps] (jetty) {Jetty};
 	    
-	    \draw[->] (backend) -- node[above] {\tiny{deploy}} (wildfly);
+	    \draw[->] (backend) -- node[above] {\tiny{deploy}} (glassfish);
 	    \draw[->] (mapApps) -- node[above] {\tiny{deploy}} (jetty);
 	    
 	    \node[header, right = 2cm of eclipseDevelopment] (eclipseModeling) {Eclipse Modeling IDE};
@@ -295,3 +295,49 @@ map MediaCapturingView.imageoutput to :ComplaintProvider.picture
     \end{center}
 \end{frame}
 
+
+
+\begin{frame}
+    \frametitle{map.apps Architecture}
+	\begin{center}
+	\begin{tikzpicture}[
+		>=stealth,
+		box/.style = {draw, minimum width = 2cm, minimum height = 0.8cm, align=center},
+		box2/.style = {draw, minimum width = 3.3cm, minimum height = 0.5cm, align=center},
+		node distance = 1cm and 0.5cm
+		]
+		
+		\node[box, fill=pantone315!10!white] (wfe1) {WfE 1};
+		\node[box, right = of wfe1, fill=pantone315!10!white] (wfe2) {WfE 2};
+		\draw ($(wfe1.north west) + (-0.1, 0.5)$) rectangle ($(wfe2.south east) + (0.1, -0.1)$);
+		\node[above = 0cm of wfe1] (app1) {\textbf{app1}};
+		
+		\node[box, below = 1cm of wfe1, fill=pantone315!10!white] (wfe3) {WfE 3};
+		\node[box, below = 1cm of wfe2, fill=pantone315!10!white] (wfe4) {WfE 4};
+		\draw ($(wfe3.north west) + (-0.1, 0.5)$) rectangle ($(wfe4.south east) + (0.1, -0.1)$);
+		\node[above = 0cm of wfe3] (app2) {\textbf{app2}};
+		
+		\draw[fill=black] ($(wfe2.north east) + (0.5, 0.5)$) rectangle ($(wfe4.south east) + (0.55, -2.3)$);
+		
+		\node[box2, right = 1cm of wfe2, fill=pantone315!10!white]  (gb1) {List of open Issues};
+		\node[box2, below = 0.1cm of gb1, fill=pantone315!10!white] (gb2) {Runtime};
+		\node[box2, below = 0.1cm of gb2, fill=pantone315!10!white] (gb3) {Location Service};
+		\node[box2, below = 0.1cm of gb3, fill=pantone315!10!white] (gb4) {Workflow Store};
+		\node[box2, below = 0.1cm of gb4, fill=pantone315!10!white] (gb5) {Local Store};
+		\node[box2, below = 0.1cm of gb5, fill=pantone315!10!white] (gb6) {Store};
+		\node[box2, below = 0.1cm of gb6, fill=pantone315!10!white] (gb7) {Formcontrols};
+		
+		\draw ($(gb1.north west) + (-0.1, 0.5)$) rectangle ($(gb7.south east) + (0.1, -0.1)$);
+		\node[above = 0cm of gb1] (genericBundles) {\textbf{Generic bundles}};
+		
+		%\node[box, fill=pantone315!10!white] (model) {Model};
+		%\node[box, below = of model] (dsl) {Domain-Specific\\Language};
+		%\draw[<-] (model) -- node[right] (uses) {} (dsl);
+		%\node[box, right = 1.75cm of uses] (generator) {Generator};
+		%\node[box, right = of generator] (platforms) {Code for\\Platforms};
+		%\draw[->] (dsl) -| (generator);
+		%\draw[->] (model) -| (generator);
+		%\draw[->] (generator) -- (platforms);
+	\end{tikzpicture}
+	\end{center}
+\end{frame}
