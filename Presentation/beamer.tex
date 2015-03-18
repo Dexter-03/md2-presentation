@@ -14,6 +14,16 @@
 \usetikzlibrary{calc,fit,matrix,shapes,positioning,shadows,arrows}
 \tikzstyle{every picture}+=[remember picture]
 
+\tikzset{
+	invisible/.style={opacity=0},
+	visible/.style={alt=#1{}{invisible}},
+	alt/.code args={<#1>#2#3}{%
+		\alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}}
+	},
+	highlight/.style={maincolor, alt=#1{}{plain}},
+	plain/.style={pantoneblack7},
+}
+
 \pgfdeclarelayer{bg}    % declare background layer
 \pgfdeclarelayer{fg}    % declare foreground layer
 \pgfsetlayers{bg,main,fg}  % set the order of the layers (main is the standard layer)
