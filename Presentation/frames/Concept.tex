@@ -64,7 +64,7 @@ App AdministrationApp {
 	\frametitle{Calling External Webservices}
 \begin{lstlisting}[basicstyle=\footnotesize\ttfamily]
 externalWebService sendEmail {
-  url "http://psmd2.uni-muenster.de:8080/SendMail/api/mail/send/"
+   url "http://psmd2.uni-muenster.de:8080/SendMail/api/mail/send/"
    method GET
    queryparams (
      "to" : "md2@trashmail.de"
@@ -72,17 +72,22 @@ externalWebService sendEmail {
      "body" : "Dear ladies and gentlemen, this is an e-mail sent by md2 map.apps!"
    )
 }
-	
-bind action WebServiceCall sendEmail on EmailView.SendButton.onClick
+\end{lstlisting}
+\codeheading{Usage within a Workflow Element}
+\begin{lstlisting}[basicstyle=\footnotesize\ttfamily]	
+bind action WebServiceCall sendEmail on myView.myBtn.onClick
 \end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{Starting Workflows from External WS Calls}
+\codeheading{Workflow Layer}
 \begin{lstlisting}[basicstyle=\footnotesize\ttfamily]
 WorkflowElement LocationDetection (invokable)
   fires ...
-		
+\end{lstlisting}
+\codeheading{Controller Layer}
+\begin{lstlisting}[basicstyle=\footnotesize\ttfamily]		
 invokable at "address" using POST {
   set :ComplaintProvider.loc to :AddressProvider
   :AddressProvider.myStreet
