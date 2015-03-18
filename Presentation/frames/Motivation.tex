@@ -96,6 +96,9 @@
 			\draw[->] (scios) -- (iosapp);
 			\draw[->] (scandroid) -- (androidapp);
 			\draw[->] (scbackend) -- (backendcontainer);
+			
+			\draw[thick, dashed, lightgray] ($ (android.north west) + (-0.1, 0.1) $) rectangle ($ (backend.south east) + (0.1, -0.1) $);
+			\node[gray, overlay, left = 0.05cm of android, draw=none] {\tiny{Generator}};
 		}
 	    \end{tikzpicture}
     \end{center}
@@ -115,6 +118,7 @@
 		smallbox/.style = {fill=gray!25!white, minimum width = 2.35cm},
 		new/.style = {fill=pantone315!10!white},
 		light/.style = {fill=gray!10!white},
+		unused/.style = {dotted, gray, fill=gray!5!white, text=lightgray},
 		node distance = 0.2cm
 		]
 		{\small
@@ -129,33 +133,33 @@
 			\node[bigbox, below = of preprocessing] (completed) {Completed \MD Model};
 			\draw[->] (preprocessing) -- (completed);
 			
-			\node[smallbox, below = of completed.south west, anchor = north west] (android) {Android\vphantom{Aq}};
-			\node[smallbox, right = of android] (ios) {iOS\vphantom{Aq}};
+			\node[smallbox, unused, below = of completed.south west, anchor = north west] (android) {Android\vphantom{Aq}};
+			\node[smallbox, unused, right = of android] (ios) {iOS\vphantom{Aq}};
 			\node[smallbox, new, below = of completed.south east, anchor = north east] (mapapps) {map.apps\vphantom{Aq}};
 			\node[smallbox, left = of mapapps] (backend) {Backend\vphantom{Aq}};
 			
-			\draw[->] (completed) -- (ios.north);
-			\draw[->] (completed) -- (android.north);
+			\draw[->, lightgray] (completed) -- (ios.north);
+			\draw[->, lightgray] (completed) -- (android.north);
 			\draw[->] (completed) -- (backend.north);
 			\draw[->] (completed) -- (mapapps.north);
 			
-			\node[smallbox, below = of ios] (scios) {Source code};
-			\node[smallbox, below = of android] (scandroid) {Source code};
+			\node[smallbox, unused, below = of ios] (scios) {Source code};
+			\node[smallbox, unused, below = of android] (scandroid) {Source code};
 			\node[smallbox, below = of backend] (scbackend) {Source code};
 			\node[smallbox, new, below = of mapapps] (scmapapps) {Source code};
 			
-			\draw[->] (ios) -- (scios);
-			\draw[->] (android) -- (scandroid);
+			\draw[->, lightgray] (ios) -- (scios);
+			\draw[->, lightgray] (android) -- (scandroid);
 			\draw[->] (backend) -- (scbackend);
 			\draw[->] (mapapps) -- (scmapapps);
 			
-			\node[smallbox, below = of scios] (iosapp) {iOS app\vphantom{Aq}};
-			\node[smallbox, below = of scandroid] (androidapp) {Android app\vphantom{Aq}};
+			\node[smallbox, unused, below = of scios] (iosapp) {iOS app\vphantom{Aq}};
+			\node[smallbox, unused, below = of scandroid] (androidapp) {Android app\vphantom{Aq}};
 			\node[smallbox, below = of scbackend] (backendcontainer) {Container\vphantom{Aq}};
 			\node[smallbox, new, below = of scmapapps] (mapappsapp) {map.apps app\vphantom{Aq}};
 			
-			\draw[->] (scios) -- (iosapp);
-			\draw[->] (scandroid) -- (androidapp);
+			\draw[->, lightgray] (scios) -- (iosapp);
+			\draw[->, lightgray] (scandroid) -- (androidapp);
 			\draw[->] (scbackend) -- (backendcontainer);
 			\draw[->] (scmapapps) -- (mapappsapp);
 			
