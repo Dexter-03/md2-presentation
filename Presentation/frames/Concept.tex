@@ -94,8 +94,54 @@ invokable at "address" using POST {
 \end{lstlisting}
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{Location Action}
+
+\begin{itemize}
+\item calculates coordinates from a given address and stores them
+\item uses the ArcGIS API for JavaScript
+\end{itemize}
+
+\begin{lstlisting}[basicstyle=\footnotesize\ttfamily]
+action Location (
+    inputs (
+       cityInput :AddressProvider.myCity
+       streetInput :AddressProvider.myStreet
+       streetNumberInput :AddressProvider.myStreetNo
+       postalInput :AddressProvider.myPostalCode
+       countryInput :AddressProvider.myCountry
+    )
+    outputs (
+       latitudeOutput :AddressProvider.myLatitude
+       longitudeOutput  :AddressProvider.myLongitude
+    ))		 				
+\end{lstlisting}
+
+\end{frame}
 
 
+\begin{frame}[fragile]
+\frametitle{Upload Images}
+\begin{itemize}
+\item view layer:
+\end{itemize}
+\begin{lstlisting}[basicstyle=\footnotesize\ttfamily]
+FileUpload UploadBtn {text "Upload File"}
+UploadedImageOutput imageoutput
+\end{lstlisting}
+\begin{itemize}
+\item controller layer:
+\end{itemize}
+\begin{lstlisting}[basicstyle=\footnotesize\ttfamily]
+main {
+	...  
+	fileUploadConnection UploadConnection
+}
+map MediaCapturingView.UploadBtn to :ComplaintProvider.picture
+map MediaCapturingView.imageoutput to :ComplaintProvider.picture
+\end{lstlisting}
+
+\end{frame}
 %-----------------------------------------------------------------------------------
 
 \begin{frame}[plain]
@@ -149,14 +195,6 @@ invokable at "address" using POST {
 
 \end{frame}
 
-
-\begin{frame}
-    \frametitle{DSL}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Generated Code}
-\end{frame}
 
 %\begin{frame}
 %    \frametitle{Generator}
@@ -256,10 +294,5 @@ invokable at "address" using POST {
 	    
 	    \end{tikzpicture}
     \end{center}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Deployment}
-TODO: show symblinks irgendwie... oder kommt das in der live vorfuehrung?
 \end{frame}
 
