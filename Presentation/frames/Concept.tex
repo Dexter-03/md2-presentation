@@ -137,6 +137,58 @@ App AdministrationApp {
 
 %-----------------------------------------------------------------------------------
 
+\begin{frame}
+    \frametitle{map.apps Architecture}
+	\begin{center}
+	\begin{tikzpicture}[
+		>=stealth,
+		box/.style = {draw, minimum width = 3cm, minimum height = 1.5em, outer sep=0},
+		box2/.style = {box, minimum width = 3.5cm},
+		node distance = 0.1cm
+		]
+		
+		\node[box, fill=pantone315!10!white] (wfe1) {WfE 1};
+		\node[box, right = of wfe1, fill=pantone315!10!white] (wfe2) {WfE 2};
+		\node[box, minimum width=6.1cm, below = of wfe1.south west, anchor = north west, fill=pantone315!10!white] (wfEventHandler1) {WorkflowEventHandler};
+		\node[box, below = of wfEventHandler1.south west, anchor=north west, fill=pantone315!10!white] (models1) {Models};
+		\node[box, right = of models1, fill=pantone315!10!white] (contentProv1) {ContentProvider};
+		\draw ($(wfe1.north west) + (-0.1, 0.6)$) node[below right] {\textbf{App 1}} rectangle ($(contentProv1.south east) + (0.1, -0.1)$);
+		
+		\node[box, below = 2.3cm of wfe1, fill=pantone315!10!white] (wfe3) {WfE 3};
+		\node[box, below = 2.3cm of wfe2, fill=pantone315!10!white] (wfe4) {WfE 4};
+		\node[box, below = of wfe3.south west, anchor = north west, minimum width=6.1cm, fill=pantone315!10!white] (wfEventHandler2) {WorkflowEventHandler};
+		\node[box, below = of wfEventHandler2.south west, anchor=north west, fill=pantone315!10!white] (models2) {Models};
+		\node[box, right = of models2, fill=pantone315!10!white] (contentProv2) {ContentProvider};
+		\draw ($(wfe3.north west) + (-0.1, 0.6)$) node[below right] {\textbf{App 2}} rectangle ($(contentProv2.south east) + (0.1, -0.1)$);
+		
+		\draw[<->, thick] ($ (wfEventHandler1.east) + (0.1, 0) $) -- ++(0.8,0);
+		\draw[<->, thick] ($ (wfEventHandler2.east) + (0.1, 0) $) -- ++(0.8,0);
+		
+		\node[box2, right = 1cm of wfe2.north east, anchor=north west, fill=pantone315!10!white]  (gb1) {List of open issues};
+		\node[box2, below = of gb1, fill=pantone315!10!white] (gb2) {Runtime};
+		\node[box2, below = of gb2, fill=pantone315!10!white] (gb3) {Location Service};
+		\node[box2, below = of gb3, fill=pantone315!10!white] (gb4) {Workflow Store};
+		\node[box2, below = of gb4, fill=pantone315!10!white] (gb5) {Local Store};
+		\node[box2, below = of gb5, fill=pantone315!10!white] (gb6) {Store};
+		\node[box2, below = of gb6, fill=pantone315!10!white] (gb7) {Formcontrols};
+		
+		\draw ($(gb1.north west) + (-0.1, 0.6)$) node[below right] {\textbf{Generic bundles}} rectangle ($(gb7.south east) + (0.1, -0.1)$);
+
+		
+		%\node[box, fill=pantone315!10!white] (model) {Model};
+		%\node[box, below = of model] (dsl) {Domain-Specific\\Language};
+		%\draw[<-] (model) -- node[right] (uses) {} (dsl);
+		%\node[box, right = 1.75cm of uses] (generator) {Generator};
+		%\node[box, right = of generator] (platforms) {Code for\\Platforms};
+		%\draw[->] (dsl) -| (generator);
+		%\draw[->] (model) -| (generator);
+		%\draw[->] (generator) -- (platforms);
+	\end{tikzpicture}
+	\end{center}
+\end{frame}
+
+%-----------------------------------------------------------------------------------
+
 \begin{frame}[fragile]
 	\frametitle{Calling External Webservices}
 	\begin{center}
@@ -317,32 +369,32 @@ map MediaCapturingView.imageoutput to :ComplaintProvider.picture
 %	\end{center}
 %\end{frame}
 
-\begin{frame}
-    \frametitle{Deployment}
-    
-    \begin{center}   
-	    \begin{tikzpicture}[
-	    >=stealth,
-	    node distance = 0.75cm and 0.25cm,
-	    big/.style = {draw, minimum width = 2.5cm, minimum height = 1.75em}
-	    ]
-	    \node[big] (generator) {Generator};
-	    \node[big, below left = of generator] (mapapps) {map.apps source\vphantom{Aq}};
-	    \node[big, below right = of generator] (backend) {backend source\vphantom{Aq}};
-	    \draw[->] (generator) -| node[above] {\tiny{generates}} (mapapps);
-	    \draw[->] (generator) -| node[above] {\tiny{generates}} (backend);
-	    \node[big, rounded corners, below = of mapapps] (jetty) {Jetty\vphantom{Aq}};
-	    \node[big, rounded corners, below = of backend] (glassfish) {Glassfish\vphantom{Aq}};
-	    \draw[->] (mapapps) -- node[left] {\tiny{deployed on}} (jetty);
-	    \draw[->] (backend) -- node[right] {\tiny{deployed on}} (glassfish);
-	    \draw[<->] (jetty) -- node[above] (communicates) {\tiny{communicates}} (glassfish);
-	    
-	    \node[big, rounded corners, below = of communicates] (tomcat) {Tomcat};
-	    \node[big, gray, below = 0cm of tomcat] {map.apps full};	    
-	    
-	    \end{tikzpicture}
-    \end{center}
-\end{frame}
+%\begin{frame}
+%    \frametitle{Deployment}
+%    
+%    \begin{center}   
+%	    \begin{tikzpicture}[
+%	    >=stealth,
+%	    node distance = 0.75cm and 0.25cm,
+%	    big/.style = {draw, minimum width = 2.5cm, minimum height = 1.75em}
+%	    ]
+%	    \node[big] (generator) {Generator};
+%	    \node[big, below left = of generator] (mapapps) {map.apps source\vphantom{Aq}};
+%	    \node[big, below right = of generator] (backend) {backend source\vphantom{Aq}};
+%	    \draw[->] (generator) -| node[above] {\tiny{generates}} (mapapps);
+%	    \draw[->] (generator) -| node[above] {\tiny{generates}} (backend);
+%	    \node[big, rounded corners, below = of mapapps] (jetty) {Jetty\vphantom{Aq}};
+%	    \node[big, rounded corners, below = of backend] (glassfish) {Glassfish\vphantom{Aq}};
+%	    \draw[->] (mapapps) -- node[left] {\tiny{deployed on}} (jetty);
+%	    \draw[->] (backend) -- node[right] {\tiny{deployed on}} (glassfish);
+%	    \draw[<->] (jetty) -- node[above] (communicates) {\tiny{communicates}} (glassfish);
+%	    
+%	    \node[big, rounded corners, below = of communicates] (tomcat) {Tomcat};
+%	    \node[big, gray, below = 0cm of tomcat] {map.apps full};	    
+%	    
+%	    \end{tikzpicture}
+%    \end{center}
+%\end{frame}
 
 %-----------------------------------------------------------------------------------
 
@@ -389,121 +441,4 @@ map MediaCapturingView.imageoutput to :ComplaintProvider.picture
 	    
 	    \end{tikzpicture}
     \end{center}
-\end{frame}
-
-%-----------------------------------------------------------------------------------
-
-\begin{frame}
-    \frametitle{Continuous Integration with Jenkins}
-    
-    \begin{figure}
-    	\includegraphics[width= 0.9\linewidth]{Images/jenkins-jobs.png}
-    \end{figure}
-    
-    \vspace{-1ex}
-    
-    \begin{itemize}
-       \item \texttt{de.wwu.md2.framework}
-       \begin{itemize}
-           \item builds every time the \texttt{mapapps} branch is updated
-       \end{itemize}
-       \item \texttt{de.wwu.md2.framework-Pull-Requests} 
-       \begin{itemize}
-           \item builds for each pull request
-           \item merged with current \texttt{mapapps} branch
-       \end{itemize}
-    \end{itemize}
-\end{frame}
-
-%-----------------------------------------------------------------------------------
-
-\begin{frame}[plain]
-\frametitle{Test Trend Chart: mapapps branch}
-\plainnumber
-\begin{center}
-\includegraphics[width=1\textwidth] {images/test-trend-chart-md2-framework.png}
-\end{center}
-\end{frame}
-
-%-----------------------------------------------------------------------------------
-
-%\begin{frame}[plain]
-%\frametitle{Test Trend Chart: pull requests}
-%\plainnumber
-%\begin{center}
-%\includegraphics[width=1\textwidth, clip = true] %{images/test-trend-chart-md2-pull-requests.png}
-%\end{center}
-%\end{frame}
-
-%-----------------------------------------------------------------------------------
-
-\begin{frame}[fragile]
-    \frametitle{Bug Fixes}
-
-\begin{itemize}
-  \item Disable a button \tiny{(e.g., "Previous" button in first view)}  
-\end{itemize}
-
-\begin{center}
-\includegraphics[width=0.6\textwidth] {images/disabled-previous-button.png}
-\end{center}
-
-\vspace{-1ex}
-
-\begin{lstlisting}[basicstyle=\footnotesize\ttfamily]
-Button MyPreviousBtn { 
-  style button text "Previous" disabled true
-}
-\end{lstlisting}
-
-\end{frame}	
-
-\begin{frame}
-    \frametitle{map.apps Architecture}
-	\begin{center}
-	\begin{tikzpicture}[
-		>=stealth,
-		box/.style = {draw, minimum width = 3cm, minimum height = 1.5em, outer sep=0},
-		box2/.style = {box, minimum width = 3.5cm},
-		node distance = 0.1cm
-		]
-		
-		\node[box, fill=pantone315!10!white] (wfe1) {WfE 1};
-		\node[box, right = of wfe1, fill=pantone315!10!white] (wfe2) {WfE 2};
-		\node[box, minimum width=6.1cm, below = of wfe1.south west, anchor = north west, fill=pantone315!10!white] (wfEventHandler1) {WorkflowEventHandler};
-		\node[box, below = of wfEventHandler1.south west, anchor=north west, fill=pantone315!10!white] (models1) {Models};
-		\node[box, right = of models1, fill=pantone315!10!white] (contentProv1) {ContentProvider};
-		\draw ($(wfe1.north west) + (-0.1, 0.6)$) node[below right] {\textbf{App 1}} rectangle ($(contentProv1.south east) + (0.1, -0.1)$);
-		
-		\node[box, below = 2.3cm of wfe1, fill=pantone315!10!white] (wfe3) {WfE 3};
-		\node[box, below = 2.3cm of wfe2, fill=pantone315!10!white] (wfe4) {WfE 4};
-		\node[box, below = of wfe3.south west, anchor = north west, minimum width=6.1cm, fill=pantone315!10!white] (wfEventHandler2) {WorkflowEventHandler};
-		\node[box, below = of wfEventHandler2.south west, anchor=north west, fill=pantone315!10!white] (models2) {Models};
-		\node[box, right = of models2, fill=pantone315!10!white] (contentProv2) {ContentProvider};
-		\draw ($(wfe3.north west) + (-0.1, 0.6)$) node[below right] {\textbf{App 2}} rectangle ($(contentProv2.south east) + (0.1, -0.1)$);
-		
-		\draw[<->, thick] ($ (wfEventHandler1.east) + (0.1, 0) $) -- ++(0.8,0);
-		\draw[<->, thick] ($ (wfEventHandler2.east) + (0.1, 0) $) -- ++(0.8,0);
-		
-		\node[box2, right = 1cm of wfe2.north east, anchor=north west, fill=pantone315!10!white]  (gb1) {List of open issues};
-		\node[box2, below = of gb1, fill=pantone315!10!white] (gb2) {Runtime};
-		\node[box2, below = of gb2, fill=pantone315!10!white] (gb3) {Location Service};
-		\node[box2, below = of gb3, fill=pantone315!10!white] (gb4) {Workflow Store};
-		\node[box2, below = of gb4, fill=pantone315!10!white] (gb5) {Local Store};
-		\node[box2, below = of gb5, fill=pantone315!10!white] (gb6) {Store};
-		\node[box2, below = of gb6, fill=pantone315!10!white] (gb7) {Formcontrols};
-		
-		\draw ($(gb1.north west) + (-0.1, 0.6)$) node[below right] {\textbf{Generic bundles}} rectangle ($(gb7.south east) + (0.1, -0.1)$);
-
-		
-		%\node[box, fill=pantone315!10!white] (model) {Model};
-		%\node[box, below = of model] (dsl) {Domain-Specific\\Language};
-		%\draw[<-] (model) -- node[right] (uses) {} (dsl);
-		%\node[box, right = 1.75cm of uses] (generator) {Generator};
-		%\node[box, right = of generator] (platforms) {Code for\\Platforms};
-		%\draw[->] (dsl) -| (generator);
-		%\draw[->] (model) -| (generator);
-		%\draw[->] (generator) -- (platforms);
-	\end{tikzpicture}
-	\end{center}
 \end{frame}

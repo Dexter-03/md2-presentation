@@ -1,4 +1,5 @@
 % !TEX root = ../beamer.tex
+
 \begin{frame}
     \frametitle{Our Procedure}
     \begin{itemize}
@@ -13,6 +14,8 @@
     \end{center}
 \end{frame}
 
+%-----------------------------------------------------------------------------------
+
 \begin{frame}
 	\frametitle{Our Scrum Board}
     \begin{figure}
@@ -21,6 +24,8 @@
 	    \end{center}
 	\end{figure}
 \end{frame}
+
+%-----------------------------------------------------------------------------------
 
 \begin{frame}
 \frametitle{Story Cards}
@@ -56,6 +61,52 @@
 \end{center}
 \end{frame}
 
+%-----------------------------------------------------------------------------------
+
+\begin{frame}
+    \frametitle{Continuous Integration with Jenkins}
+    
+    \begin{figure}
+    	\includegraphics[width= 0.9\linewidth]{Images/jenkins-jobs.png}
+    \end{figure}
+    
+    \vspace{-1ex}
+    
+    \begin{itemize}
+       \item \texttt{de.wwu.md2.framework}
+       \begin{itemize}
+           \item builds every time the \texttt{mapapps} branch is updated
+       \end{itemize}
+       \item \texttt{de.wwu.md2.framework-Pull-Requests} 
+       \begin{itemize}
+           \item builds for each pull request
+           \item merged with current \texttt{mapapps} branch
+       \end{itemize}
+    \end{itemize}
+\end{frame}
+
+%-----------------------------------------------------------------------------------
+
+\begin{frame}[plain]
+\frametitle{Test Trend Chart: mapapps branch}
+\plainnumber
+\begin{center}
+\includegraphics[width=1\textwidth] {images/test-trend-chart-md2-framework.png}
+\end{center}
+\end{frame}
+
+%-----------------------------------------------------------------------------------
+
+%\begin{frame}[plain]
+%\frametitle{Test Trend Chart: pull requests}
+%\plainnumber
+%\begin{center}
+%\includegraphics[width=1\textwidth, clip = true] %{images/test-trend-chart-md2-pull-requests.png}
+%\end{center}
+%\end{frame}
+
+%-----------------------------------------------------------------------------------
+
 \begin{frame}[plain]
 	\frametitle{Bugs}
     \begin{center}
@@ -64,4 +115,31 @@
 		\end{tikzpicture}
     \end{center}
 \end{frame}
+
+%-----------------------------------------------------------------------------------
+
+\begin{frame}[fragile]
+    \frametitle{Bug Fixes}
+
+\begin{itemize}
+  \item Disable a button \tiny{(e.g., "Previous" button in first view)}  
+\end{itemize}
+
+\begin{center}
+\includegraphics[width=0.6\textwidth] {images/disabled-previous-button.png}
+\end{center}
+
+\vspace{-1ex}
+
+\begin{lstlisting}[basicstyle=\footnotesize\ttfamily]
+Button MyPreviousBtn { 
+  style button text "Previous" disabled true
+}
+\end{lstlisting}
+
+\end{frame}	
+
+%-----------------------------------------------------------------------------------
+
+
 
