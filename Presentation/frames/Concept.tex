@@ -370,6 +370,30 @@ map MediaCapturingView.imageoutput to :ComplaintProvider.picture
 %-----------------------------------------------------------------------------------
 
 \begin{frame}
+    \frametitle{Continuous Integration}
+    
+    \begin{figure}
+    	\includegraphics[width= 0.9\linewidth]{Images/jenkins-jobs.png}
+    \end{figure}
+    
+    \vspace{-1ex}
+    
+    \begin{itemize}
+       \item \texttt{de.wwu.md2.framework}
+       \begin{itemize}
+           \item builds every time the \texttt{mapapps} branch is updated
+       \end{itemize}
+       \item \texttt{de.wwu.md2.framework-Pull-Requests} 
+       \begin{itemize}
+           \item builds for each pull request
+           \item merged with current master branch
+       \end{itemize}
+    \end{itemize}
+\end{frame}
+
+%-----------------------------------------------------------------------------------
+
+\begin{frame}
     \frametitle{map.apps Architecture}
 	\begin{center}
 	\begin{tikzpicture}[
