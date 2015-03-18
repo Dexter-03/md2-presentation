@@ -221,13 +221,14 @@ invokable at "address" using POST {
 	    \begin{tikzpicture}[
 	    >=stealth,
 	    node distance = 0.75cm and 0.25cm,
-	    big/.style = {draw, minimum width = 2.5cm, minimum height = 1.75em}
+	    big/.style = {draw, minimum width = 2.5cm, minimum height = 1.75em},
+	    header/.style = {big, fill=pantone315!30!white, outer sep = 0}
 	    ]
-	    \node[big, fill=pantone315!30!white] (eclipseDevelopment) {Eclipse Development IDE};
+	    \node[header] (eclipseDevelopment) {Eclipse Development IDE};
 	    \node[big, below = 0.05cm of eclipseDevelopment] (dsl) {DSL};
 	    \node[big, below = 0.05cm of dsl] (generator) {Generator};
 	    
-	    \node[big, below=1.4cm of generator, fill=pantone315!30!white] (generatedArtifacts) {Generated Artifacts};
+	    \node[below=1.4cm of generator, header] (generatedArtifacts) {Generated Artifacts\vphantom{Aq}};
 	    \node[big, below = 0.05cm of generatedArtifacts] (backend) {backend};
 	    \node[big, below = 0.05cm of backend] (mapApps) {map.apps};
 	    
@@ -237,7 +238,7 @@ invokable at "address" using POST {
 	    \draw[->] (backend) -- node[above] {\tiny{deploy}} (wildfly);
 	    \draw[->] (mapApps) -- node[above] {\tiny{deploy}} (jetty);
 	    
-	    \node[big, right = 2cm of eclipseDevelopment, fill=pantone315!30!white] (eclipseModeling) {Eclipse Modeling IDE};
+	    \node[header, right = 2cm of eclipseDevelopment] (eclipseModeling) {Eclipse Modeling IDE};
 	    \node[big, below = 0.05cm of eclipseModeling] (md2model) {\MD Model};
 	    \node[below = 0cm of md2model] (modelModels) {models};
 	    \node[below = 0cm of modelModels] (modelViews) {views};
