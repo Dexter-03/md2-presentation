@@ -59,23 +59,104 @@ App AdministrationApp {
 
 \end{frame}
 
+%-----------------------------------------------------------------------------------
+
+\begin{frame}[plain]
+
+\plainnumber
+
+\frametitle{Implementation: WorkflowEventHandler}
+
+\begin{center}
+	\begin{tikzpicture}[
+	>=stealth,
+	wfe/.style = {draw, circle, fill=black!15!white},
+	eh/.style = {draw, minimum height = 3cm, minimum width = 3cm, fill=pantone315!30!white}
+	]
+		\node (citizen) {\includegraphics[width=0.5cm]{images/stickfigure}};
+		\node[below = 0cm of citizen] (citizenlbl) {\scriptsize Citizen};
+		
+		\node[wfe, below = of citizenlbl] (wfe1) {WFE1};
+		\node[wfe, below = of wfe1] (wfe2) {WFE2};
+		\node[eh, right = 2cm of wfe1.north east, anchor = north west] (eh) {Event Handler};
+		\node[draw, minimum width = 2cm, minimum height = 1cm, right = 2cm of eh, fill=pantone369!20!white] (be) {Backend};
+		
+		\begin{pgfonlayer}{bg}
+			\draw[fill=pantone396!10!white, draw=pantone396] ($ (wfe1.north west) + (-0.4, 0.4) $) rectangle  ($ (eh.south east) + (0.5, -0.5) $);
+		\end{pgfonlayer}
+		
+		\draw<1->[->, thick] (citizenlbl) -- node[right] {\scriptsize{\texttt{start}}} (wfe1);
+		\draw<2->[->, thick] (wfe1) -- node[above, sloped] {\scriptsize{\texttt{ID, event}}} (eh);
+		\draw<3->[->, thick] (eh.west) -- node[above, sloped] {\scriptsize{\texttt{changeWFE}}} (wfe2.north east);
+		\draw<4->[->, thick] (wfe2.east) -- node[below, sloped] {\scriptsize{\texttt{ID, event}}} (eh);
+		\draw<5->[->, thick] (eh) -- node[above] {\scriptsize{\texttt{ID, event}}} (be);
+		
+		\visible<6->{
+			\node[above right = 0.75cm and 1.5cm of citizenlbl] (admin) {\includegraphics[width=0.5cm]{images/stickfigure}};
+			\node[below = 0cm of admin] (adminlbl) {\scriptsize Admin};
+			\node[draw, fill=black!15!white, right = of admin, minimum width = 2cm, minimum height = 1cm] (looi) {LOOI};
+			\draw[->, thick] (admin) -- node[above] {\scriptsize{\texttt{show}}} (looi);
+		}
+		\draw<7->[->, thick] ($(looi.east) + (0, 0.1) $) -| node[right] {\scriptsize{\texttt{appID}}} ($(be.north) + (0.1, 0)$);
+		\draw<8->[<-, thick] ($(looi.east) + (0, -0.1) $) -| node[below left] {\scriptsize{\texttt{open issues}}} ($(be.north) + (-0.1, 0)$);
+		\visible<9->{
+			\node[wfe, below right = 0.5cm of looi] (wfe3) {WFE3};
+			\draw[->, thick] (looi) |- node[above right] {\scriptsize{\texttt{start}}} (wfe3);	
+		}
+			\begin{pgfonlayer}{bg}
+				\draw<6->[fill=pantone396!10!white, draw=pantone396] ($ (looi.north west) + (-0.4, 0.4) $) rectangle  ($ (wfe3.south east) + (0.5, -0.5) $);
+			\end{pgfonlayer}
+		
+	\end{tikzpicture}
+\end{center}
+
+\end{frame}
+
+%-----------------------------------------------------------------------------------
 
 \begin{frame}[fragile]
 	\frametitle{Calling External Webservices}
 \begin{lstlisting}[basicstyle=\footnotesize\ttfamily]
 externalWebService sendEmail {
   url "http://psmd2.uni-muenster.de:8080/SendMail/api/mail/send/"
-   method GET
-   queryparams (
-     "to" : "md2@trashmail.de"
-     "subject" : "Map.Apps E-Mail"
-     "body" : "Dear ladies and gentlemen, this is an e-mail sent by md2 map.apps!"
-   )
+  method GET
+  queryparams (
+    "to" : "md2@trashmail.de"
+    "subject" : "Map.Apps E-Mail"
+    "body" : "Dear ladies and gentlemen, this is an e-mail sent by md2 map.apps!"
+  )
 }
 	
 bind action WebServiceCall sendEmail on EmailView.SendButton.onClick
 \end{lstlisting}
 \end{frame}
+
+%-----------------------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{Starting Workflows from External WS Calls}
+
+\begin{tikzpicture}[
+	>=stealth,
+	block/.style = {draw, fill=white, minimum width = 4cm,  minimum height = 1.75em}]
+	\node[draw=pantone315, minimum width = 4cm, fill=pantone315!30!white, align=center] (IS) {External\\Information System};
+	\node[block, below = 1.5cm of IS] (WS) {WS to start WFE1};
+	\node[block, below = of WS] (wfe1) {WorkflowState WFE1};
+	\node<2->[block, right = 1.5cm of WS] (looi) {List of open issues};
+	
+	\begin{pgfonlayer}{bg}
+		\draw[fill=pantone369!20!white, draw=pantone369] ($ (WS.north west) + (-0.5, 0.5) $) node[above right] {\scriptsize\color{gray}Backend\vphantom{Aq}} rectangle ($ (wfe1.south east) + (0.5, -0.5) $);
+		\draw<2->[fill=pantone396!20!white, draw=pantone396] ($ (looi.north west) + (-0.5, 0.5) $) node[above right] {\scriptsize\color{gray}\mapapps app\vphantom{Aq}} rectangle ($ (looi.south east) + (0.5, -0.5) $) ;
+	\end{pgfonlayer}
+	
+	\draw[->] (IS) -- node[above right] {\texttt{\scriptsize{call}}} (WS);
+	\draw[->, transform canvas = {xshift=-1.5cm}] (WS) -- node[right] {\texttt{\scriptsize{create}}} (wfe1);
+	\draw<2->[->] (looi) |- node[above left] {\texttt{\scriptsize{load}}} (wfe1);
+\end{tikzpicture}
+
+\end{frame}
+
+
 
 \begin{frame}[fragile]
 	\frametitle{Starting Workflows from External WS Calls}
@@ -142,56 +223,6 @@ map MediaCapturingView.imageoutput to :ComplaintProvider.picture
 \end{frame}
 %-----------------------------------------------------------------------------------
 
-\begin{frame}[plain]
-
-\plainnumber
-
-\frametitle{Implementation: WorkflowEventHandler}
-
-\begin{center}
-	\begin{tikzpicture}[
-	>=stealth,
-	wfe/.style = {draw, circle, fill=black!15!white},
-	eh/.style = {draw, minimum height = 3cm, minimum width = 3cm, fill=pantone315!30!white}
-	]
-		\node (citizen) {\includegraphics[width=0.5cm]{images/stickfigure}};
-		\node[below = 0cm of citizen] (citizenlbl) {\scriptsize Citizen};
-		
-		\node[wfe, below = of citizenlbl] (wfe1) {WFE1};
-		\node[wfe, below = of wfe1] (wfe2) {WFE2};
-		\node[eh, right = 2cm of wfe1.north east, anchor = north west] (eh) {Event Handler};
-		\node[draw, minimum width = 2cm, minimum height = 1cm, right = 2cm of eh, fill=pantone369!20!white] (be) {Backend};
-		
-		\begin{pgfonlayer}{bg}
-			\draw[fill=pantone396!10!white, draw=pantone396] ($ (wfe1.north west) + (-0.4, 0.4) $) rectangle  ($ (eh.south east) + (0.5, -0.5) $);
-		\end{pgfonlayer}
-		
-		\draw<1->[->, thick] (citizenlbl) -- node[right] {\scriptsize{\texttt{start}}} (wfe1);
-		\draw<2->[->, thick] (wfe1) -- node[above, sloped] {\scriptsize{\texttt{ID, event}}} (eh);
-		\draw<3->[->, thick] (eh.west) -- node[above, sloped] {\scriptsize{\texttt{changeWFE}}} (wfe2.north east);
-		\draw<4->[->, thick] (wfe2.east) -- node[below, sloped] {\scriptsize{\texttt{ID, event}}} (eh);
-		\draw<5->[->, thick] (eh) -- node[above] {\scriptsize{\texttt{ID, event}}} (be);
-		
-		\visible<6->{
-			\node[above right = 0.75cm and 1.5cm of citizenlbl] (admin) {\includegraphics[width=0.5cm]{images/stickfigure}};
-			\node[below = 0cm of admin] (adminlbl) {\scriptsize Admin};
-			\node[draw, fill=black!15!white, right = of admin, minimum width = 2cm, minimum height = 1cm] (looi) {LOOI};
-			\draw[->, thick] (admin) -- node[above] {\scriptsize{\texttt{show}}} (looi);
-		}
-		\draw<7->[->, thick] ($(looi.east) + (0, 0.1) $) -| node[right] {\scriptsize{\texttt{appID}}} ($(be.north) + (0.1, 0)$);
-		\draw<8->[<-, thick] ($(looi.east) + (0, -0.1) $) -| node[below left] {\scriptsize{\texttt{open issues}}} ($(be.north) + (-0.1, 0)$);
-		\visible<9->{
-			\node[wfe, below right = 0.5cm of looi] (wfe3) {WFE3};
-			\draw[->, thick] (looi) |- node[above right] {\scriptsize{\texttt{start}}} (wfe3);	
-		}
-			\begin{pgfonlayer}{bg}
-				\draw<6->[fill=pantone396!10!white, draw=pantone396] ($ (looi.north west) + (-0.4, 0.4) $) rectangle  ($ (wfe3.south east) + (0.5, -0.5) $);
-			\end{pgfonlayer}
-		
-	\end{tikzpicture}
-\end{center}
-
-\end{frame}
 
 
 %\begin{frame}
