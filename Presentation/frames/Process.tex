@@ -27,6 +27,40 @@
 
 %-----------------------------------------------------------------------------------
 
+\begin{frame}[plain]
+	\frametitle{Bugs}
+    \begin{center}
+		\begin{tikzpicture}
+			\node[fill=white, draw, drop shadow] {\includegraphics[width=.85\textwidth]{images/bugs}};
+		\end{tikzpicture}
+    \end{center}
+\end{frame}
+
+%-----------------------------------------------------------------------------------
+
+\begin{frame}[fragile]
+    \frametitle{Bug Fixes}
+
+\begin{itemize}
+  \item Disable a button \tiny{(e.g., "Previous" button in first view)}  
+\end{itemize}
+
+\begin{center}
+\includegraphics[width=0.6\textwidth] {images/disabled-previous-button.png}
+\end{center}
+
+\vspace{-1ex}
+
+\begin{lstlisting}[basicstyle=\footnotesize\ttfamily]
+Button MyPreviousBtn { 
+  style button text "Previous" disabled true
+}
+\end{lstlisting}
+
+\end{frame}	
+
+%-----------------------------------------------------------------------------------
+
 \begin{frame}
 \frametitle{Story Cards}
 \begin{center}
@@ -67,7 +101,7 @@
     \frametitle{Continuous Integration with Jenkins}
     
     \begin{figure}
-    	\includegraphics[width= 0.9\linewidth]{Images/jenkins-jobs.png}
+    	\includegraphics[width= 0.9\linewidth]{images/jenkins-jobs.png}
     \end{figure}
     
     \vspace{-1ex}
@@ -88,7 +122,7 @@
 %-----------------------------------------------------------------------------------
 
 \begin{frame}[plain]
-\frametitle{Test Trend Chart: \mapapps branch}
+\frametitle{Test Trend Chart: \texttt{mapapps} branch}
 \plainnumber
 \begin{center}
 \includegraphics[width=1\textwidth] {images/test-trend-chart-md2-framework.png}
@@ -104,40 +138,6 @@
 %\includegraphics[width=1\textwidth, clip = true] %{images/test-trend-chart-md2-pull-requests.png}
 %\end{center}
 %\end{frame}
-
-%-----------------------------------------------------------------------------------
-
-\begin{frame}[plain]
-	\frametitle{Bugs}
-    \begin{center}
-		\begin{tikzpicture}
-			\node[fill=white, draw, drop shadow] {\includegraphics[width=.85\textwidth]{images/bugs}};
-		\end{tikzpicture}
-    \end{center}
-\end{frame}
-
-%-----------------------------------------------------------------------------------
-
-\begin{frame}[fragile]
-    \frametitle{Bug Fixes}
-
-\begin{itemize}
-  \item Disable a button \tiny{(e.g., "Previous" button in first view)}  
-\end{itemize}
-
-\begin{center}
-\includegraphics[width=0.6\textwidth] {images/disabled-previous-button.png}
-\end{center}
-
-\vspace{-1ex}
-
-\begin{lstlisting}[basicstyle=\footnotesize\ttfamily]
-Button MyPreviousBtn { 
-  style button text "Previous" disabled true
-}
-\end{lstlisting}
-
-\end{frame}	
 
 %-----------------------------------------------------------------------------------
 
