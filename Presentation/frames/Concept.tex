@@ -85,11 +85,11 @@ App AdministrationApp {
 			\draw[fill=pantone396!10!white, draw=pantone396] ($ (wfe1.north west) + (-0.4, 0.4) $) rectangle  ($ (eh.south east) + (0.5, -0.5) $);
 		\end{pgfonlayer}
 		
-		\draw<1->[->, thick] (citizenlbl) -- node[right] {\scriptsize{\texttt{start}}} (wfe1);
-		\draw<2->[->, thick] (wfe1) -- node[above, sloped] {\scriptsize{\texttt{ID, event}}} (eh);
-		\draw<3->[->, thick] (eh.west) -- node[above, sloped] {\scriptsize{\texttt{changeWFE}}} (wfe2.north east);
-		\draw<4->[->, thick] (wfe2.east) -- node[below, sloped] {\scriptsize{\texttt{ID, event}}} (eh);
-		\draw<5->[->, thick] (eh) -- node[above] {\scriptsize{\texttt{ID, event}}} (be);
+		\draw[->, thick, visible=<1->] (citizenlbl) -- node[right] {\scriptsize{\texttt{start}}} (wfe1);
+		\draw[->, thick, visible=<2->] (wfe1) -- node[above, sloped] {\scriptsize{\texttt{ID, event}}} (eh);
+		\draw[->, thick, visible=<3->] (eh.west) -- node[above, sloped] {\scriptsize{\texttt{changeWFE}}} (wfe2.north east);
+		\draw[->, thick, visible=<4->] (wfe2.east) -- node[below, sloped] {\scriptsize{\texttt{ID, event}}} (eh);
+		\draw[->, thick, visible=<5->] (eh) -- node[above] {\scriptsize{\texttt{ID, event}}} (be);
 		
 		\visible<6->{
 			\node[above right = 0.75cm and 1.5cm of citizenlbl] (admin) {\includegraphics[width=0.5cm]{images/stickfigure}};
@@ -97,19 +97,44 @@ App AdministrationApp {
 			\node[draw, fill=black!15!white, right = of admin, minimum width = 2cm, minimum height = 1cm] (looi) {LOOI};
 			\draw[->, thick] (admin) -- node[above] {\scriptsize{\texttt{show}}} (looi);
 		}
-		\draw<7->[->, thick] ($(looi.east) + (0, 0.1) $) -| node[right] {\scriptsize{\texttt{appID}}} ($(be.north) + (0.1, 0)$);
-		\draw<8->[<-, thick] ($(looi.east) + (0, -0.1) $) -| node[below left] {\scriptsize{\texttt{open issues}}} ($(be.north) + (-0.1, 0)$);
+		\draw[->, thick, visible=<7->] ($(looi.east) + (0, 0.1) $) -| node[right] {\scriptsize{\texttt{appID}}} ($(be.north) + (0.1, 0)$);
+		\draw[<-, thick, visible=<8->] ($(looi.east) + (0, -0.1) $) -| node[below left] {\scriptsize{\texttt{open issues}}} ($(be.north) + (-0.1, 0)$);
 		\visible<9->{
 			\node[wfe, below right = 0.5cm of looi] (wfe3) {WFE3};
 			\draw[->, thick] (looi) |- node[above right] {\scriptsize{\texttt{start}}} (wfe3);	
 		}
-			\begin{pgfonlayer}{bg}
-				\draw<6->[fill=pantone396!10!white, draw=pantone396] ($ (looi.north west) + (-0.4, 0.4) $) rectangle  ($ (wfe3.south east) + (0.5, -0.5) $);
-			\end{pgfonlayer}
-		
+		\begin{pgfonlayer}{bg}
+			\draw[fill=pantone396!10!white, draw=pantone396, visible=<6->] ($ (looi.north west) + (-0.4, 0.4) $) rectangle  ($ (wfe3.south east) + (0.5, -0.5) $);
+		\end{pgfonlayer}		
 	\end{tikzpicture}
 \end{center}
 
+\end{frame}
+
+%-----------------------------------------------------------------------------------
+
+\begin{frame}[fragile]
+	\frametitle{Calling External Webservices}
+	\begin{center}
+	\begin{tikzpicture}[>=stealth,
+		box/.style={minimum width = 2cm, minimum height = 1cm}]
+		\node[box, fill=pantone396!10!white, draw=pantone396] (mapapps) {\mapapps\vphantom{Aq}};
+		\node[box, right = 2cm of mapapps, fill=pantone369!20!white, draw=pantone369] (be) {Backend\vphantom{Aq}};
+		\node[box, right = 2cm of be, fill=pantone315!20!white, draw=pantone315, align=center] (ws) {External\\Webservice\vphantom{Aq}};
+		\draw[thick, transform canvas = {yshift=0.25cm}, ->] (mapapps) -- node[above] {\footnotesize\texttt{JSON data\vphantom{Aq}}} (be);
+		\draw[thick, transform canvas = {yshift=-0.25cm}, <-] (mapapps) -- node[below] {\footnotesize\texttt{{\color{pantone390!80!black}200}/\alert{404}\vphantom{Aq}}} (be);
+		\draw[thick, transform canvas = {yshift=0.25cm}, ->] (be) -- node[above] {\footnotesize\texttt{request\vphantom{Aq}}} (ws);
+		\draw[thick, transform canvas = {yshift=-0.25cm}, <-] (be) -- node[below] {\footnotesize\texttt{response\vphantom{Aq}}} (ws);
+	\end{tikzpicture}
+	\end{center}
+	
+	\vfill
+	
+	\begin{itemize}
+		\item Backend acts as a proxy for all webservice calls
+		\item Transforms JSON-encoded object into request
+		\item (Currently) only returns status code for success or failure
+	\end{itemize}
 \end{frame}
 
 %-----------------------------------------------------------------------------------
@@ -327,7 +352,7 @@ map MediaCapturingView.imageoutput to :ComplaintProvider.picture
 	    
 	    \draw[->] (md2model) -- node[above] {\tiny{uses}} (dsl);
 	    \draw[->] (generator) -- node[left] {\tiny{generates}} (generatedArtifacts);
-	    \draw[->] ($(eclipseModeling.south west) + (0, -1.17)$) -- node[above] {\tiny{invoces}} (generator);   
+	    \draw[->] ($(eclipseModeling.south west) + (0, -1.17)$) -- node[above] {\tiny{invokes}} (generator);   
 
 	    \draw (eclipseDevelopment.north west) rectangle ($(eclipseDevelopment.south east) + (0, -1.7)$);
 	    \draw (generatedArtifacts.north west) rectangle ($(generatedArtifacts.south east) + (0, -1.7)$);
@@ -346,42 +371,38 @@ map MediaCapturingView.imageoutput to :ComplaintProvider.picture
 	\begin{center}
 	\begin{tikzpicture}[
 		>=stealth,
-		box/.style = {draw, minimum width = 2cm, minimum height = 0.5cm, align=center},
-		box2/.style = {draw, minimum width = 3.3cm, minimum height = 0.5cm, align=center},
-		node distance = 1cm and 0.5cm
+		box/.style = {draw, minimum width = 3cm, minimum height = 1.5em, outer sep=0},
+		box2/.style = {box, minimum width = 3.5cm},
+		node distance = 0.1cm
 		]
 		
 		\node[box, fill=pantone315!10!white] (wfe1) {WfE 1};
 		\node[box, right = of wfe1, fill=pantone315!10!white] (wfe2) {WfE 2};
-		\node[box, below = 0.1cm of wfe1.south west, anchor = north west, fill=pantone315!10!white] (wfEventHandler1) {WorkflowEventHandler};
-		\node[box, below = 0.1cm of wfEventHandler1.south west, anchor=north west, fill=pantone315!10!white] (models1) {Models};
+		\node[box, minimum width=6.1cm, below = of wfe1.south west, anchor = north west, fill=pantone315!10!white] (wfEventHandler1) {WorkflowEventHandler};
+		\node[box, below = of wfEventHandler1.south west, anchor=north west, fill=pantone315!10!white] (models1) {Models};
 		\node[box, right = of models1, fill=pantone315!10!white] (contentProv1) {ContentProvider};
-		\draw ($(wfe1.north west) + (-0.1, 0.5)$) rectangle ($(contentProv1.south east) + (0.1, -0.1)$);
-		\node[above = 0cm of wfe1] (app1) {\textbf{app1}};
-		
-		\draw[<->] (4.5,-0.6) -- (4.9,-0.6);
-		\draw[<->] (4.5,-3) -- (4.9,-3);
+		\draw ($(wfe1.north west) + (-0.1, 0.6)$) node[below right] {\textbf{App 1}} rectangle ($(contentProv1.south east) + (0.1, -0.1)$);
 		
 		\node[box, below = 2.3cm of wfe1, fill=pantone315!10!white] (wfe3) {WfE 3};
 		\node[box, below = 2.3cm of wfe2, fill=pantone315!10!white] (wfe4) {WfE 4};
-		\node[box, below = 0.1cm of wfe3.south west, anchor = north west, fill=pantone315!10!white] (wfEventHandler2) {WorkflowEventHandler};
-		\node[box, below = 0.1cm of wfEventHandler2.south west, anchor=north west, fill=pantone315!10!white] (models2) {Models};
+		\node[box, below = of wfe3.south west, anchor = north west, minimum width=6.1cm, fill=pantone315!10!white] (wfEventHandler2) {WorkflowEventHandler};
+		\node[box, below = of wfEventHandler2.south west, anchor=north west, fill=pantone315!10!white] (models2) {Models};
 		\node[box, right = of models2, fill=pantone315!10!white] (contentProv2) {ContentProvider};
-		\draw ($(wfe3.north west) + (-0.1, 0.5)$) rectangle ($(contentProv2.south east) + (0.1, -0.1)$);
-		\node[above = 0cm of wfe3] (app2) {\textbf{app2}};
+		\draw ($(wfe3.north west) + (-0.1, 0.6)$) node[below right] {\textbf{App 2}} rectangle ($(contentProv2.south east) + (0.1, -0.1)$);
 		
-		%\draw[fill=black] ($(wfe2.north east) + (0.5, 0.5)$) rectangle ($(wfe4.south east) + (0.55, -2.3)$);
+		\draw[<->, thick] ($ (wfEventHandler1.east) + (0.1, 0) $) -- ++(0.8,0);
+		\draw[<->, thick] ($ (wfEventHandler2.east) + (0.1, 0) $) -- ++(0.8,0);
 		
-		\node[box2, right = 1.5cm of wfe2, fill=pantone315!10!white]  (gb1) {List of open Issues};
-		\node[box2, below = 0.1cm of gb1, fill=pantone315!10!white] (gb2) {Runtime};
-		\node[box2, below = 0.1cm of gb2, fill=pantone315!10!white] (gb3) {Location Service};
-		\node[box2, below = 0.1cm of gb3, fill=pantone315!10!white] (gb4) {Workflow Store};
-		\node[box2, below = 0.1cm of gb4, fill=pantone315!10!white] (gb5) {Local Store};
-		\node[box2, below = 0.1cm of gb5, fill=pantone315!10!white] (gb6) {Store};
-		\node[box2, below = 0.1cm of gb6, fill=pantone315!10!white] (gb7) {Formcontrols};
+		\node[box2, right = 1cm of wfe2.north east, anchor=north west, fill=pantone315!10!white]  (gb1) {List of open issues};
+		\node[box2, below = of gb1, fill=pantone315!10!white] (gb2) {Runtime};
+		\node[box2, below = of gb2, fill=pantone315!10!white] (gb3) {Location Service};
+		\node[box2, below = of gb3, fill=pantone315!10!white] (gb4) {Workflow Store};
+		\node[box2, below = of gb4, fill=pantone315!10!white] (gb5) {Local Store};
+		\node[box2, below = of gb5, fill=pantone315!10!white] (gb6) {Store};
+		\node[box2, below = of gb6, fill=pantone315!10!white] (gb7) {Formcontrols};
 		
-		\draw ($(gb1.north west) + (-0.1, 0.5)$) rectangle ($(gb7.south east) + (0.1, -0.1)$);
-		\node[above = 0cm of gb1] (genericBundles) {\textbf{Generic bundles}};
+		\draw ($(gb1.north west) + (-0.1, 0.6)$) node[below right] {\textbf{Generic bundles}} rectangle ($(gb7.south east) + (0.1, -0.1)$);
+
 		
 		%\node[box, fill=pantone315!10!white] (model) {Model};
 		%\node[box, below = of model] (dsl) {Domain-Specific\\Language};
