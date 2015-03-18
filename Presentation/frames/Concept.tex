@@ -394,7 +394,7 @@ map MediaCapturingView.imageoutput to :ComplaintProvider.picture
 %-----------------------------------------------------------------------------------
 
 \begin{frame}
-    \frametitle{Continuous Integration}
+    \frametitle{Continuous Integration with Jenkins}
     
     \begin{figure}
     	\includegraphics[width= 0.9\linewidth]{Images/jenkins-jobs.png}
@@ -410,10 +410,30 @@ map MediaCapturingView.imageoutput to :ComplaintProvider.picture
        \item \texttt{de.wwu.md2.framework-Pull-Requests} 
        \begin{itemize}
            \item builds for each pull request
-           \item merged with current master branch
+           \item merged with current \texttt{mapapps} branch
        \end{itemize}
     \end{itemize}
 \end{frame}
+
+%-----------------------------------------------------------------------------------
+
+\begin{frame}[plain]
+\frametitle{Test Trend Chart: mapapps branch}
+\plainnumber
+\begin{center}
+\includegraphics[width=1\textwidth] {images/test-trend-chart-md2-framework.png}
+\end{center}
+\end{frame}
+
+%-----------------------------------------------------------------------------------
+
+%\begin{frame}[plain]
+%\frametitle{Test Trend Chart: pull requests}
+%\plainnumber
+%\begin{center}
+%\includegraphics[width=1\textwidth, clip = true] %{images/test-trend-chart-md2-pull-requests.png}
+%\end{center}
+%\end{frame}
 
 %-----------------------------------------------------------------------------------
 
