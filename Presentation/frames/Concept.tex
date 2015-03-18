@@ -98,8 +98,8 @@ invokable at "address" using POST {
 \frametitle{Location Action}
 
 \begin{itemize}
-\item calculates coordinates from a given address and stores them
-\item uses the ArcGIS API for JavaScript
+\item Calculates coordinates from a given address and stores them
+\item Uses the ArcGIS API for JavaScript
 \end{itemize}
 
 \begin{lstlisting}[basicstyle=\footnotesize\ttfamily]
@@ -122,16 +122,15 @@ action Location (
 
 \begin{frame}[fragile]
 \frametitle{Upload Images}
-\begin{itemize}
-\item view layer:
-\end{itemize}
+\codeheading{View Layer}
 \begin{lstlisting}[basicstyle=\footnotesize\ttfamily]
 FileUpload UploadBtn {text "Upload File"}
 UploadedImageOutput imageoutput
 \end{lstlisting}
-\begin{itemize}
-\item controller layer:
-\end{itemize}
+
+\vfill
+
+\codeheading{Controller Layer}
 \begin{lstlisting}[basicstyle=\footnotesize\ttfamily]
 main {
 	...  
@@ -140,7 +139,6 @@ main {
 map MediaCapturingView.UploadBtn to :ComplaintProvider.picture
 map MediaCapturingView.imageoutput to :ComplaintProvider.picture
 \end{lstlisting}
-
 \end{frame}
 %-----------------------------------------------------------------------------------
 
