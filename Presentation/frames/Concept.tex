@@ -437,6 +437,27 @@ map MediaCapturingView.imageoutput to :ComplaintProvider.picture
 
 %-----------------------------------------------------------------------------------
 
+\begin{frame}[fragile]
+    \frametitle{Bug Fixes}
+
+\begin{itemize}
+  \item Disable a button \tiny{(e.g., "Previous" button in first view)}  
+\end{itemize}
+
+\begin{center}
+\includegraphics[width=0.6\textwidth] {images/disabled-previous-button.png}
+\end{center}
+
+\vspace{-1ex}
+
+\begin{lstlisting}[basicstyle=\footnotesize\ttfamily]
+Button MyPreviousBtn { 
+  style button text "Previous" disabled true
+}
+\end{lstlisting}
+
+\end{frame}	
+
 \begin{frame}
     \frametitle{map.apps Architecture}
 	\begin{center}
