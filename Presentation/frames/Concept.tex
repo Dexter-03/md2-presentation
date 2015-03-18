@@ -354,23 +354,23 @@ map MediaCapturingView.imageoutput to :ComplaintProvider.picture
 	    >=stealth,
 	    node distance = 0.75cm and 0.25cm,
 	    big/.style = {draw, minimum width = 2.5cm, minimum height = 1.75em},
-	    header/.style = {big, fill=pantone315!30!white, outer sep = 0}
+	    header/.style = {big, minimum width = 3.2cm, fill=pantone315!10!white, outer sep = 0}
 	    ]
-	    \node[header] (eclipseDevelopment) {Eclipse Development IDE};
+	    \node[header] (eclipseDevelopment) {Framework IDE};
 	    \node[big, below = 0.05cm of eclipseDevelopment] (dsl) {DSL};
 	    \node[big, below = 0.05cm of dsl] (generator) {Generator};
 	    
 	    \node[below=1.4cm of generator, header] (generatedArtifacts) {Generated Artifacts\vphantom{Aq}};
-	    \node[big, below = 0.05cm of generatedArtifacts] (backend) {backend};
+	    \node[big, below = 0.05cm of generatedArtifacts] (backend) {Backend};
 	    \node[big, below = 0.05cm of backend] (mapApps) {map.apps};
 	    
-	    \node[big, right = 2cm of backend] (glassfish) {glassfish AS};
-	    \node[big, right = 2cm of mapApps] (jetty) {Jetty};
+	    \node[big, right = 2cm of backend, fill=pantone315!10!white] (glassfish) {Glassfish AS};
+	    \node[big, right = 2cm of mapApps, fill=pantone315!10!white] (jetty) {Jetty};
 	    
 	    \draw[->] (backend) -- node[above] {\tiny{deploy}} (glassfish);
 	    \draw[->] (mapApps) -- node[above] {\tiny{deploy}} (jetty);
 	    
-	    \node[header, right = 2cm of eclipseDevelopment] (eclipseModeling) {Eclipse Modeling IDE};
+	    \node[header, right = 2cm of eclipseDevelopment] (eclipseModeling) {Modeling IDE};
 	    \node[big, below = 0.05cm of eclipseModeling] (md2model) {\MD Model};
 	    \node[below = 0cm of md2model] (modelModels) {models};
 	    \node[below = 0cm of modelModels] (modelViews) {views};
@@ -379,7 +379,7 @@ map MediaCapturingView.imageoutput to :ComplaintProvider.picture
 	    
 	    \draw[->] (md2model) -- node[above] {\tiny{uses}} (dsl);
 	    \draw[->] (generator) -- node[left] {\tiny{generates}} (generatedArtifacts);
-	    \draw[->] ($(eclipseModeling.south west) + (0, -1.17)$) -- node[above] {\tiny{invokes}} (generator);   
+	    \draw[->] ($(eclipseModeling.south west) + (0, -1.125)$) -- node[above] {\tiny{invokes}} (generator);   
 
 	    \draw (eclipseDevelopment.north west) rectangle ($(eclipseDevelopment.south east) + (0, -1.7)$);
 	    \draw (generatedArtifacts.north west) rectangle ($(generatedArtifacts.south east) + (0, -1.7)$);
@@ -389,6 +389,30 @@ map MediaCapturingView.imageoutput to :ComplaintProvider.picture
 	    
 	    \end{tikzpicture}
     \end{center}
+\end{frame}
+
+%-----------------------------------------------------------------------------------
+
+\begin{frame}
+    \frametitle{Continuous Integration}
+    
+    \begin{figure}
+    	\includegraphics[width= 0.9\linewidth]{Images/jenkins-jobs.png}
+    \end{figure}
+    
+    \vspace{-1ex}
+    
+    \begin{itemize}
+       \item \texttt{de.wwu.md2.framework}
+       \begin{itemize}
+           \item builds every time the \texttt{mapapps} branch is updated
+       \end{itemize}
+       \item \texttt{de.wwu.md2.framework-Pull-Requests} 
+       \begin{itemize}
+           \item builds for each pull request
+           \item merged with current master branch
+       \end{itemize}
+    \end{itemize}
 \end{frame}
 
 %-----------------------------------------------------------------------------------
