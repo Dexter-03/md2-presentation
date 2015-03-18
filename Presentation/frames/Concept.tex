@@ -31,6 +31,30 @@ WorkflowElement ReviewComplaint
 
 \end{frame}
 
+\begin{frame}[fragile]
+ \frametitle{Workflow Element Specification, Controller Layer}
+ 
+\begin{lstlisting}
+main {
+	appVersion "1.0" 
+	modelVersion "1.0"
+	...
+}
+
+WorkflowElement LocationDetection{
+	defaultProcessChain LocationProcessChain
+	onInit {
+		init,
+		...
+	}	
+	action CustomAction init{
+		bind action FireEvent(LocationEvent) on LocationVerifyView.Next.onClick
+		bind action FireEvent(WithoutPhotoEvent) on LocationVerifyView.SkipUpload.onClick
+	}
+}
+\end{lstlisting}
+\end{frame}
+
 %-----------------------------------------------------------------------------------
 
 \begin{frame}[fragile, plain]
