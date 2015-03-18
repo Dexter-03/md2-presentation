@@ -2,6 +2,7 @@
 
 \usepackage[pantone315,english]{wwustyle}
 
+\usepackage{etoolbox}
 \usepackage[ngerman]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -10,10 +11,14 @@
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{mauve}{RGB}{127,0,85}
 
-\usetikzlibrary{calc,fit,shapes,positioning,shadows,arrows}
+\usetikzlibrary{calc,fit,matrix,shapes,positioning,shadows,arrows}
+\tikzstyle{every picture}+=[remember picture]
 
 \pgfdeclarelayer{bg}    % declare background layer
-\pgfsetlayers{bg,main}  % set the order of the layers (main is the standard layer)
+\pgfdeclarelayer{fg}    % declare foreground layer
+\pgfsetlayers{bg,main,fg}  % set the order of the layers (main is the standard layer)
+
+
 
 % SOURCE CODE FORMATTING
 \usepackage{listings}
@@ -62,22 +67,52 @@
 
 \usepackage{setspace}
 
-\setbeamertemplate{section in toc}[sections numbered] % TODO color only section number
-\setbeamercolor*{section in toc}{fg=normal text.fg}
+%---------------------------------------------------------------------
+%% Navigation Bar
+\setbeamertemplate{footline}{
+  \fontsize{6pt}{1pt}
+  \selectfont
+  \vskip4pt
+  \color{maincolor}
+  \rule{\textwidth}{1.2pt}\\ % horizontal line
+  \vskip2pt
+  \rule{\textwidth}{0.8pt}\\ % horizontal line
+  \vskip5pt
+  \rule{\textwidth}{1.2pt} % horizontal line
+  \vskip2pt
+  \color{black}
+  \hspace{5.1mm}
+  \insertshortauthor 
+  \begin{beamercolorbox}[ht=0cm, leftskip=3ex]{section in head/foot}
+    \insertsectionnavigationhorizontal{.75\paperwidth}{}{}
+  \end{beamercolorbox}
+  \vskip1.8pt
+}
+
+%% Automatic Outline
+\AtBeginSection[]
+{
+	\ifnumequal{\value{framenumber}}{1}{%
+	\begin{frame}{Outline}
+		\tableofcontents[currentsection, sectionstyle=show/show, subsectionstyle=hide/hide/hide, subsubsectionstyle=hide/hide/hide]
+	\end{frame}
+	\addtocounter{framenumber}{-1}
+	}{}
+
+	\begin{frame}{Outline}
+		\tableofcontents[currentsection, sectionstyle=show/shaded, subsectionstyle=hide/hide/hide, subsubsectionstyle=hide/hide/hide]
+	\end{frame}
+}
+%% Numbered and Colored TOC
+\setbeamertemplate{section in toc}{\leavevmode\usebeamercolor[fg]{section in toc}\inserttocsectionnumber. \usebeamercolor[fg]{normal text}\inserttocsection\par}
+\setbeamertemplate{subsection in toc}{\leavevmode\leftskip=1em\usebeamercolor[fg]{section in toc}\inserttocsectionnumber.\inserttocsubsectionnumber\, \usebeamercolor[fg]{normal text}\inserttocsubsection\par}
+
+%---------------------------------------------------------------------
 
 % Uncomment the following two lines if you want to prepare your document for
 % the fast mode.
 % \usetikzlibrary{external}
 % \tikzexternalize
-
-\newcommand{\MD}{MD$^2$\xspace}
-\newcommand{\mapapps}{map.apps\xspace}
-
-\author{Project Seminar \MD}
-\title{Model-Driven Mobile Development}
-%\institutelogo{Logo on title frame}
-%\institutelogosmall{Logo on other frames}
-\subtitle{\MD for map.apps}
 
 %Show page number on plain frames with command \plainnumber
 \newcommand{\plainnumber}{%
@@ -87,27 +122,17 @@
 \end{tikzpicture}
 }
 
-% Add a navigation bar to footline
-\setbeamertemplate{footline}{
- \fontsize{6pt}{1pt}
- \selectfont
- \vskip4pt
- \color{maincolor}
- \rule{\textwidth}{1.2pt}\\ % horizontal line
-  \vskip2pt
-  \rule{\textwidth}{0.8pt}\\ % horizontal line
-  \vskip5pt
-  \rule{\textwidth}{1.2pt} % horizontal line
-  \vskip2pt
-  \color{black}
- \hspace{5.1mm}
- \insertshortauthor
- \begin{beamercolorbox}[ht=0cm, leftskip=3ex]{section in head/foot}
-   \insertsectionnavigationhorizontal{.75\paperwidth}{}{}
- \end{beamercolorbox}
- \vskip1.8pt
-}
+\newcommand{\MD}{MD$^2$\xspace}
+\newcommand{\mapapps}{map.apps\xspace}
 
+
+%---------------------------------------------------------------------
+
+\author{Project Seminar \MD}
+\title{Model-Driven Mobile Development}
+%\institutelogo{Logo on title frame}
+%\institutelogosmall{Logo on other frames}
+\subtitle{\MD for map.apps}
 
 
 \begin{document}
@@ -115,10 +140,8 @@
 	\begin{frame}[plain]
 	  \maketitle
 	\end{frame}
-
-    \input{frames/frame-outline}
     
-    \section[Motivation]{Motivation}
+    \section{Motivation}
     \input{frames/Motivation}
     
     \section[Results]{Implementation and Results}
