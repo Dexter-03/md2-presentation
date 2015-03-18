@@ -1,5 +1,86 @@
 % !TEX root = ../beamer.tex
 
+\begin{frame}
+\frametitle{New Features Overview}
+
+\begin{itemize}
+\item  Workflow specification with modular workflow elements
+\item Workflow specification across apps
+\item Terminate workflow
+\item Calculate location coordinates from an address
+\item Call external Webservices
+\item Start workflow from external Systems via WS
+\item Upload image
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Extending \MD and \mapapps}
+    
+    \begin{center}   
+	    \begin{tikzpicture}[
+		>=stealth,
+		outer sep = 0pt,
+		every node/.style={rectangle, draw, minimum height = 1.6em},
+		bigbox/.style = {fill=gray!25!white, minimum width=10cm},
+		smallbox/.style = {fill=gray!25!white, minimum width = 2.35cm},
+		light/.style = {fill=gray!10!white},
+		new/.style = {fill=pantone315!10!white},
+		unused/.style = {dotted, gray, fill=gray!5!white, text=lightgray},
+		node distance = 0.2cm
+		]
+		{\small
+			\node[bigbox] (md2model) {\MD Model};
+			\node[light, below = 0cm of md2model.south west, anchor = north west, minimum width = 2.5cm] (model) {Model};
+			\node[light, minimum width = 2.5cm, right = 0cm of model] (view) {View};
+			\node[light, right = 0cm of view, minimum width = 2.5cm] (controller) {Controller};
+			\node[light, new, right = 0cm of controller, minimum width = 2.5cm] {Workflow};
+			
+			\node[bigbox, below = of model.south west, anchor=north west] (preprocessing) {Preprocessing};			
+			\draw[->] (view.south east) -- (preprocessing);
+		    
+			\node[bigbox, below = of preprocessing] (completed) {Completed \MD Model};
+			\draw[->] (preprocessing) -- (completed);
+			
+			\node[smallbox, unused, below = of completed.south west, anchor = north west] (android) {Android\vphantom{Aq}};
+			\node[smallbox, unused, right = of android] (ios) {iOS\vphantom{Aq}};
+			\node[smallbox, below = of completed.south east, anchor = north east] (mapapps) {map.apps\vphantom{Aq}};
+			\node[smallbox, left = of mapapps] (backend) {Backend\vphantom{Aq}};
+			
+			\draw[->, lightgray] (completed) -- (ios.north);
+			\draw[->, lightgray] (completed) -- (android.north);
+			\draw[->] (completed) -- (backend.north);
+			\draw[->] (completed) -- (mapapps.north);
+			
+			\node[smallbox, unused, below = of ios] (scios) {Source code};
+			\node[smallbox, unused, below = of android] (scandroid) {Source code};
+			\node[smallbox, below = of backend] (scbackend) {Source code};
+			\node[smallbox, below = of mapapps] (scmapapps) {Source code};
+			
+			\draw[->, lightgray] (ios) -- (scios);
+			\draw[->, lightgray] (android) -- (scandroid);
+			\draw[->] (backend) -- (scbackend);
+			\draw[->] (mapapps) -- (scmapapps);
+			
+			\node[smallbox, unused, below = of scios] (iosapp) {iOS app\vphantom{Aq}};
+			\node[smallbox, unused, below = of scandroid] (androidapp) {Android app\vphantom{Aq}};
+			\node[smallbox, below = of scbackend] (backendcontainer) {Container\vphantom{Aq}};
+			\node[smallbox, below = of scmapapps] (mapappsapp) {map.apps app\vphantom{Aq}};
+			
+			\draw[->, lightgray] (scios) -- (iosapp);
+			\draw[->, lightgray] (scandroid) -- (androidapp);
+			\draw[->] (scbackend) -- (backendcontainer);
+			\draw[->] (scmapapps) -- (mapappsapp);
+			
+			\draw[thick, dashed, lightgray] ($ (android.north west) + (-0.1, 0.1) $) rectangle ($ (mapapps.south east) + (0.1, -0.1) $);
+			\node[gray, overlay, left = 0.05cm of android, draw=none] {\tiny{Generator}};
+		}
+	    \end{tikzpicture}
+    \end{center}
+	\hfill\quelle{Source: \MD Project Seminar Presentation}
+\end{frame}
+
 \begin{frame}[fragile, plain]
 	\plainnumber
 	\frametitle{Workflow Specification}
@@ -32,25 +113,21 @@ WorkflowElement ReviewComplaint
 \end{frame}
 
 \begin{frame}[fragile]
- \frametitle{Workflow Element Specification, Controller Layer}
+ \frametitle{Workflow Specification, Controller Layer}
  
-\begin{lstlisting}
-main {
-	appVersion "1.0" 
-	modelVersion "1.0"
-	...
-}
-
+\begin{lstlisting}[basicstyle=\footnotesize\ttfamily]
 WorkflowElement LocationDetection{
-	defaultProcessChain LocationProcessChain
-	onInit {
-		init,
-		...
-	}	
-	action CustomAction init{
-		bind action FireEvent(LocationEvent) on LocationVerifyView.Next.onClick
-		bind action FireEvent(WithoutPhotoEvent) on LocationVerifyView.SkipUpload.onClick
-	}
+    defaultProcessChain LocationProcessChain
+    onInit {
+        init,
+        ...
+    }	
+    action CustomAction init{
+        bind action FireEvent(LocationEvent) on LocationVerifyView.Next.onClick
+        bind action FireEvent(WithoutPhotoEvent) on LocationVerifyView.SkipUpload.onClick
+    }
+    processChain LocationProcessChain{...}
+    ...
 }
 \end{lstlisting}
 \end{frame}
@@ -216,6 +293,33 @@ App AdministrationApp {
 %-----------------------------------------------------------------------------------
 
 \begin{frame}[fragile]
+\frametitle{Location Action}
+
+\begin{itemize}
+\item Calculates coordinates from a given address and stores them
+\item Uses the ArcGIS API for JavaScript
+\end{itemize}
+
+\begin{lstlisting}[basicstyle=\footnotesize\ttfamily]
+action Location (
+    inputs (
+       cityInput :AddressProvider.myCity
+       streetInput :AddressProvider.myStreet
+       streetNumberInput :AddressProvider.myStreetNo
+       postalInput :AddressProvider.myPostalCode
+       countryInput :AddressProvider.myCountry
+    )
+    outputs (
+       latitudeOutput :AddressProvider.myLatitude
+       longitudeOutput  :AddressProvider.myLongitude
+    ))		 				
+\end{lstlisting}
+
+\end{frame}
+
+%-----------------------------------------------------------------------------------
+
+\begin{frame}[fragile]
 	\frametitle{Calling External Webservices}
 	\begin{center}
 	\begin{tikzpicture}[>=stealth,
@@ -307,32 +411,6 @@ invokable at "address" using POST {
 \end{lstlisting}
 \end{frame}
 
-%-----------------------------------------------------------------------------------
-
-\begin{frame}[fragile]
-\frametitle{Location Action}
-
-\begin{itemize}
-\item Calculates coordinates from a given address and stores them
-\item Uses the ArcGIS API for JavaScript
-\end{itemize}
-
-\begin{lstlisting}[basicstyle=\footnotesize\ttfamily]
-action Location (
-    inputs (
-       cityInput :AddressProvider.myCity
-       streetInput :AddressProvider.myStreet
-       streetNumberInput :AddressProvider.myStreetNo
-       postalInput :AddressProvider.myPostalCode
-       countryInput :AddressProvider.myCountry
-    )
-    outputs (
-       latitudeOutput :AddressProvider.myLatitude
-       longitudeOutput  :AddressProvider.myLongitude
-    ))		 				
-\end{lstlisting}
-
-\end{frame}
 
 %-----------------------------------------------------------------------------------
 
@@ -424,47 +502,4 @@ map MediaCapturingView.imageoutput to :ComplaintProvider.picture
 
 %-----------------------------------------------------------------------------------
 
-\begin{frame}
-    \frametitle{Modeling, Generation \& Deployment}
-    
-    \begin{center}   
-	    \begin{tikzpicture}[
-	    >=stealth,
-	    node distance = 0.75cm and 0.25cm,
-	    big/.style = {draw, minimum width = 2.5cm, minimum height = 1.75em},
-	    header/.style = {big, minimum width = 3.2cm, fill=pantone315!10!white, outer sep = 0}
-	    ]
-	    \node[header] (eclipseDevelopment) {Framework IDE};
-	    \node[big, below = 0.05cm of eclipseDevelopment] (dsl) {DSL};
-	    \node[big, below = 0.05cm of dsl] (generator) {Generator};
-	    
-	    \node[below=1.4cm of generator, header] (generatedArtifacts) {Generated Artifacts\vphantom{Aq}};
-	    \node[big, below = 0.05cm of generatedArtifacts] (backend) {Backend};
-	    \node[big, below = 0.05cm of backend] (mapApps) {map.apps};
-	    
-	    \node[big, right = 2cm of backend, fill=pantone315!10!white] (glassfish) {Glassfish AS};
-	    \node[big, right = 2cm of mapApps, fill=pantone315!10!white] (jetty) {Jetty};
-	    
-	    \draw[->] (backend) -- node[above] {\tiny{deploy}} (glassfish);
-	    \draw[->] (mapApps) -- node[above] {\tiny{deploy}} (jetty);
-	    
-	    \node[header, right = 2cm of eclipseDevelopment] (eclipseModeling) {Modeling IDE};
-	    \node[big, below = 0.05cm of eclipseModeling] (md2model) {\MD Model};
-	    \node[below = 0cm of md2model] (modelModels) {models};
-	    \node[below = 0cm of modelModels] (modelViews) {views};
-	    \node[below = 0cm of modelViews] (modelController) {controllers};
-	    \node[below = 0cm of modelController] (modelViews) {workflows};
-	    
-	    \draw[->] (md2model) -- node[above] {\tiny{uses}} (dsl);
-	    \draw[->] (generator) -- node[left] {\tiny{generates}} (generatedArtifacts);
-	    \draw[->] ($(eclipseModeling.south west) + (0, -1.125)$) -- node[above] {\tiny{invokes}} (generator);   
 
-	    \draw (eclipseDevelopment.north west) rectangle ($(eclipseDevelopment.south east) + (0, -1.7)$);
-	    \draw (generatedArtifacts.north west) rectangle ($(generatedArtifacts.south east) + (0, -1.7)$);
-	    \draw (eclipseModeling.north west) rectangle ($(eclipseModeling.south east) + (0, -3.5)$);
-	    \draw (md2model.south west) rectangle ($(md2model.south east) + (0, -2.5)$);
-	    
-	    
-	    \end{tikzpicture}
-    \end{center}
-\end{frame}
