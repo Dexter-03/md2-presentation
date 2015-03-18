@@ -185,7 +185,10 @@ App AdministrationApp {
 		
 		\begin{pgfonlayer}{bg}
 			\draw[fill=pantone396!10!white, draw=pantone396] ($ (wfe1.north west) + (-0.4, 0.4) $) rectangle  ($ (eh.south east) + (0.5, -0.5) $);
+			\node[pantone396, above, anchor = east] at ($(eh.south east) + (0.5, -0.8)$) {\scriptsize\color{gray}\mapapps app\vphantom{Aq}};
 		\end{pgfonlayer}
+		
+
 		
 		\draw[->, thick, visible=<1->] (citizenlbl) -- node[right] {\scriptsize{\texttt{start}}} (wfe1);
 		\draw[->, thick, visible=<2->] (wfe1) -- node[above, sloped] {\scriptsize{\texttt{wfe1, event}}} (eh);
@@ -200,7 +203,9 @@ App AdministrationApp {
 			
 			\draw[->, thick] (admin) -- node[above] {\scriptsize{\texttt{show}}} (looi);	
 		}
-		\visible<7>{
+		\draw[->, thick, visible=<7->] ($(looi.east) + (0, 0.1) $) -| node[right] {\scriptsize{\texttt{appID}}} ($(be.north) + (0.1, 0)$);
+		\draw[<-, thick, visible=<8->] ($(looi.east) + (0, -0.1) $) -| node[below left] {\scriptsize{\texttt{open issues}}} ($(be.north) + (-0.1, 0)$);
+		\visible<9>{
 			\node[overlay, align=center,right = 0.5cm of looi, rectangle callout, drop shadow, fill=white, draw, minimum width = 2.5cm, minimum height = 1.5cm, callout absolute pointer = {(looi)}] (popup) {
 				\begin{tikzpicture}
 				{\tikzset{wtf/.style = {rectangle, draw=none, fill=none, minimum width = 0cm, minimum height = 0cm }}
@@ -211,10 +216,10 @@ App AdministrationApp {
 					\node[wtf] at (0.5, 0.15) {\tiny\texttt{WFE}};
 					\node[wtf] at (1.25, 0.15) {\tiny\texttt{\dots}};
 					\node[wtf] at (0, -0.3) {\tiny\texttt{01}};
-					\node[wtf] at (0.5, -0.3) {\tiny\texttt{WFE1}};
+					\node[wtf] at (0.5, -0.3) {\tiny\texttt{WFE2}};
 					\node[wtf] at (1.25, -0.3) {\tiny\texttt{\dots}};
 					\node[wtf] at (0, -0.6) {\tiny\texttt{02}};
-					\node[wtf] at (0.5, -0.6) {\tiny\texttt{WFE3}};
+					\node[wtf] at (0.5, -0.6) {\tiny\texttt{WFE2}};
 					\node[wtf] at (1.25, -0.6) {\tiny\texttt{\dots}};
 					\node[wtf] at (0, -0.9) {\tiny\texttt{03}};
 					\node[wtf] at (0.5, -0.9) {\tiny\texttt{\dots}};
@@ -223,8 +228,6 @@ App AdministrationApp {
 				\end{tikzpicture}
 			};
 		}
-		\draw[->, thick, visible=<8->] ($(looi.east) + (0, 0.1) $) -| node[right] {\scriptsize{\texttt{appID}}} ($(be.north) + (0.1, 0)$);
-		\draw[<-, thick, visible=<9->] ($(looi.east) + (0, -0.1) $) -| node[below left] {\scriptsize{\texttt{open issues}}} ($(be.north) + (-0.1, 0)$);
 		\visible<10->{
 			\node[wfe, below right = 0.5cm of looi] (wfe3) {WFE3};
 			\draw[->, thick] (looi) |- node[above right] {\scriptsize{\texttt{start}}} (wfe3);	
