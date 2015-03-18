@@ -27,24 +27,21 @@
 
 \begin{frame}[plain]
 \frametitle{PS-\MD in Numbers}
+	\tikz[overlay]{%
+		\visible<6->{%
+			\draw (8.5,0) node[draw, fill=white, drop shadow] (img) {\includegraphics[width=0.5\textwidth]{images/lastslide.jpg}};
+			\node[below = 0.2cm of img, pantone315] {\Large{}Thank you for your attention!};
+		}
+	}
 \begin{tabular}{lr|l}~\\
 	&{\Large\color{pantone315} 5kg}&\visible<2->{Coffee}\\[1ex]
-	&{\Large\color{pantone315} 153}&\visible<3->{Coffee filters}\\[3ex] %% auf Konsistenz zu Altcoin-Screenshot achten!
-	&{\Large\color{pantone315} 300g}&\visible<4->{Loose green tea}\\[1ex]
-	&{\Large\color{pantone315} 30}&\visible<5->{Tea bags}\\[3ex]
-	&{\Large\color{pantone315} 6 pck}&\visible<6->{Post-its}\\[1ex]
-	&{\Large\color{pantone315} 4}&\visible<7->{Eddings}\\[1ex]
-	&{\Large\color{pantone315} 2}&\visible<7->{Team calendars}\\[3ex]
-	&{\Large\color{pantone315} A lot of}&\visible<7->{Nerves}\\[1ex] 
+	&{\Large\color{pantone315} 153}&\visible<2->{Coffee filters}\\[3ex] %% auf Konsistenz zu Altcoin-Screenshot achten!
+	&{\Large\color{pantone315} 300g}&\visible<3->{Loose green tea}\\[1ex]
+	&{\Large\color{pantone315} 30}&\visible<3->{Tea bags}\\[3ex]
+	&{\Large\color{pantone315} 6 pck}&\visible<4->{Post-its}\\[1ex]
+	&{\Large\color{pantone315} 4}&\visible<4->{Eddings}\\[1ex]
+	&{\Large\color{pantone315} 2}&\visible<4->{Team calendars}\\[3ex]
+	&{\Large\color{pantone315} A lot of}&\visible<5->{Nerves}\\[1ex] 
 \end{tabular}
-
 \end{frame}
 
-\begin{frame}
-\frametitle{Thank you for your attention!}
-	\begin{center}
-		\begin{tikzpicture}
-			\node[draw, fill=white, drop shadow] {\includegraphics[width=0.65\textwidth]{images/lastslide.jpg}};
-		\end{tikzpicture}
-	\end{center}
-\end{frame}
