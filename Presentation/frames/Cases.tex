@@ -6,26 +6,27 @@
     \begin{center}   
 	    \begin{tikzpicture}[
 	    >=stealth,
+	    every node/.style={outer sep = 0},
 	    node distance = 0.75cm and 0.25cm,
 	    big/.style = {draw, minimum width = 2.5cm, minimum height = 1.75em},
 	    header/.style = {big, minimum width = 3.2cm, fill=pantone315!10!white, outer sep = 0}
 	    ]
-	    \node[header] (eclipseDevelopment) {Framework IDE};
-	    \node[big, below = 0.05cm of eclipseDevelopment] (dsl) {DSL};
-	    \node[big, below = 0.05cm of dsl] (generator) {Generator};
+	    \node[header] (eclipseDevelopment) {Framework IDE\vphantom{Aq}};
+	    \node[big, below = 0.1cm of eclipseDevelopment] (dsl) {DSL\vphantom{Aq}};
+	    \node[big, below = 0.1cm of dsl] (generator) {Generator\vphantom{Aq}};
 	    
 	    \node[below=1.4cm of generator, header] (generatedArtifacts) {Generated Artifacts\vphantom{Aq}};
-	    \node[big, below = 0.05cm of generatedArtifacts] (backend) {Backend};
-	    \node[big, below = 0.05cm of backend] (mapApps) {map.apps};
+	    \node[big, below = 0.1cm of generatedArtifacts] (backend) {Backend\vphantom{Aq}};
+	    \node[big, below = 0.1cm of backend] (mapApps) {\mapapps\vphantom{Aq}};
 	    
-	    \node[big, right = 2cm of backend, fill=pantone315!10!white] (glassfish) {Glassfish AS};
+	    \node[big, right = 2cm of backend, fill=pantone315!10!white] (glassfish) {Glassfish AS\vphantom{Aq}};
 	    \node[big, right = 2cm of mapApps, fill=pantone315!10!white] (jetty) {Jetty};
 	    
 	    \draw[->] (backend) -- node[above] {\tiny{deploy}} (glassfish);
 	    \draw[->] (mapApps) -- node[above] {\tiny{deploy}} (jetty);
 	    
-	    \node[header, right = 2cm of eclipseDevelopment] (eclipseModeling) {Modeling IDE};
-	    \node[big, below = 0.05cm of eclipseModeling] (md2model) {\MD Model};
+	    \node[header, right = 2cm of eclipseDevelopment] (eclipseModeling) {Modeling IDE\vphantom{Aq}};
+	    \node[big, below = 0.1cm of eclipseModeling] (md2model) {\MD Model\vphantom{Aq}};
 	    \node[below = 0cm of md2model] (modelModels) {models};
 	    \node[below = 0cm of modelModels] (modelViews) {views};
 	    \node[below = 0cm of modelViews] (modelController) {controllers};
