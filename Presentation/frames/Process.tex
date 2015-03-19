@@ -17,52 +17,87 @@
 %-----------------------------------------------------------------------------------
 
 \begin{frame}
-    \frametitle{Scrum}
-
-    \begin{center}
-		\begin{tikzpicture}
-			\node[fill=white, draw, drop shadow] {\includegraphics[height=40mm]{images/scrum-overview.png}};
-		\end{tikzpicture}
-    \end{center}
+\frametitle{Story Cards}
+\begin{center}
+	\begin{tikzpicture}[
+		line/.style= {pantone396!50!black},
+		lbl/.style= {}
+	]
+		\draw[fill=pantone396!10!white, draw=pantone396] (0,0) rectangle (9, 6);
+		\draw[line] (0, 2) -- (9, 2);
+		\foreach \x in {1.5, 4.5, 7.5}
+			\draw[line, dashed] (\x, 0) -- (\x, 2);
+		\foreach \x in {3, 6}
+			\draw[line, ] (\x, 0) -- (\x, 2);
+		
+		\node[lbl] at (1.5, 2.25) {\scriptsize{Implementation\vphantom{Aq}}};
+		\node[lbl] at (4.5, 2.25) {\scriptsize{Tests\vphantom{Aq}}};
+		\node[lbl] at (7.5, 2.25) {\scriptsize{Documentation\vphantom{Aq}}};
+		
+		\node[] at (4.5, 4) {\Large{Task Description}};
+		
+		\node at (0.75, 1.1) {\LARGE{\textbf{\checkmark}}};
+		\node at (3.75, 1.1) {\LARGE{\textbf{\checkmark}}};
+		
+		\foreach \x in {0.75, 3.75, 6.75}
+			\node at (\x, 0.2) {\tiny{DONE}};
+		\foreach \x in {2.25, 5.25, 8.25}
+			\node at (\x, 0.2) {\tiny{REVIEWED}};
+			
+		\node[overlay, inner sep = 0, draw, rotate=6] at (7.5, 5.75) {\includegraphics[width=1.75cm]{images/malte}};
+		
+	\end{tikzpicture}
+\end{center}
 \end{frame}
 
 %-----------------------------------------------------------------------------------
 
-\begin{frame}
-   \frametitle{Scrum Board}
-       \begin{center}   
-   	    \begin{tikzpicture}
-   	       \draw[-, lightgray] (0,0) -- (10,0);
-   	       
-   	       \draw[-, lightgray] (2,0.5) -- (2,-3);
-   	       \node [above] at (1,0) {\small{\textbf{User Story\vphantom{Aq}}}};
-   	       \node [above] at (1,-1) {\small{Story 1}};
-   	       \node [above] at (1,-1.3) {\tiny{responsible: Malte\vphantom{Aq}}};
-   	       \node [above] at (1,-2) {\small{Story 2}};
-   	       \node [above] at (1,-2.3) {\tiny{responsible: Jan\vphantom{Aq}}};
-   	       
-   	       \draw[-, lightgray] (4,0.5) -- (4,-3);
-   	       \node [above] at (3,0) {\small{\textbf{Todo\vphantom{Aq}}}};
-   	       \node [above] at (3,-1) {\small{Story Cards\vphantom{Aq}}};
-   	       \node [above] at (3,-1.3) {\tiny{Card1, Card2, ...}\vphantom{Aq}};
-   	       \node [above] at (3,-2) {\small{Story Cards\vphantom{Aq}}};
-   	       \node [above] at (3,-2.3) {\tiny{Card1, Card2, ...\vphantom{Aq}}};
-   	       
-   	       \draw[-, lightgray] (6,0.5) -- (6,-3);
-   	       \node [above] at (5,0) {\small{\textbf{In Progress\vphantom{Aq}}}};
-   	       \node [above] at (5,-1) {\small{Card3\vphantom{Aq}}};
-   	       
-   	       \draw[-, lightgray] (8,0.5) -- (8,-3);
-   	       \node [above] at (7,0) {\small{\textbf{In Review\vphantom{Aq}}}};
-   	       \node [above] at (7,-2) {\small{Card4\vphantom{Aq}}};
-   	       
-   	       \node [above] at (9,0) {\small{\textbf{Done\vphantom{Aq}}}};
-   	       \node [above] at (9,-1) {\small{Card5\vphantom{Aq}}};
-   	       \node [above] at (9,-2) {\small{Card6\vphantom{Aq}}};
-   	       
-   	    \end{tikzpicture}
-   	   \end{center}
-\end{frame}
+%\begin{frame}
+%    \frametitle{Scrum} 
+%    \begin{center}
+%		\begin{tikzpicture}
+%			\node[fill=white, draw, drop shadow] {\includegraphics[height=40mm]{images/scrum-overview.png}};
+%		\end{tikzpicture}
+%    \end{center}
+%\end{frame}
+
+%-----------------------------------------------------------------------------------
+
+%\begin{frame}
+%   \frametitle{Scrum Board}
+%       \begin{center}   
+%   	    \begin{tikzpicture}
+%   	       \draw[-, lightgray] (0,0) -- (10,0);
+%   	       
+%   	       \draw[-, lightgray] (2,0.5) -- (2,-3);
+%   	       \node [above] at (1,0) {\small{\textbf{User Story\vphantom{Aq}}}};
+%   	       \node [above] at (1,-1) {\small{Story 1}};
+%   	       \node [above] at (1,-1.3) {\tiny{responsible: Malte\vphantom{Aq}}};
+%   	       \node [above] at (1,-2) {\small{Story 2}};
+%   	       \node [above] at (1,-2.3) {\tiny{responsible: Jan\vphantom{Aq}}};
+%   	       
+%   	       \draw[-, lightgray] (4,0.5) -- (4,-3);
+%   	       \node [above] at (3,0) {\small{\textbf{Todo\vphantom{Aq}}}};
+%   	       \node [above] at (3,-1) {\small{Story Cards\vphantom{Aq}}};
+%   	       \node [above] at (3,-1.3) {\tiny{Card1, Card2, ...}\vphantom{Aq}};
+%   	       \node [above] at (3,-2) {\small{Story Cards\vphantom{Aq}}};
+%   	       \node [above] at (3,-2.3) {\tiny{Card1, Card2, ...\vphantom{Aq}}};
+%   	       
+%   	       \draw[-, lightgray] (6,0.5) -- (6,-3);
+%   	       \node [above] at (5,0) {\small{\textbf{In Progress\vphantom{Aq}}}};
+%   	       \node [above] at (5,-1) {\small{Card3\vphantom{Aq}}};
+%   	       
+%   	       \draw[-, lightgray] (8,0.5) -- (8,-3);
+%   	       \node [above] at (7,0) {\small{\textbf{In Review\vphantom{Aq}}}};
+%   	       \node [above] at (7,-2) {\small{Card4\vphantom{Aq}}};
+%   	       
+%   	       \node [above] at (9,0) {\small{\textbf{Done\vphantom{Aq}}}};
+%   	       \node [above] at (9,-1) {\small{Card5\vphantom{Aq}}};
+%   	       \node [above] at (9,-2) {\small{Card6\vphantom{Aq}}};
+%   	       
+%   	    \end{tikzpicture}
+%   	   \end{center}
+%\end{frame}
 
 %-----------------------------------------------------------------------------------
 
@@ -156,42 +191,6 @@ Button MyPreviousBtn {
 %-----------------------------------------------------------------------------------
 
 \begin{frame}
-\frametitle{Story Cards}
-\begin{center}
-	\begin{tikzpicture}[
-		line/.style= {pantone396!50!black},
-		lbl/.style= {}
-	]
-		\draw[fill=pantone396!10!white, draw=pantone396] (0,0) rectangle (9, 6);
-		\draw[line] (0, 2) -- (9, 2);
-		\foreach \x in {1.5, 4.5, 7.5}
-			\draw[line, dashed] (\x, 0) -- (\x, 2);
-		\foreach \x in {3, 6}
-			\draw[line, ] (\x, 0) -- (\x, 2);
-		
-		\node[lbl] at (1.5, 2.25) {\scriptsize{Implementation\vphantom{Aq}}};
-		\node[lbl] at (4.5, 2.25) {\scriptsize{Tests\vphantom{Aq}}};
-		\node[lbl] at (7.5, 2.25) {\scriptsize{Documentation\vphantom{Aq}}};
-		
-		\node[] at (4.5, 4) {\Large{Task Description}};
-		
-		\node at (0.75, 1.1) {\LARGE{\textbf{\checkmark}}};
-		\node at (3.75, 1.1) {\LARGE{\textbf{\checkmark}}};
-		
-		\foreach \x in {0.75, 3.75, 6.75}
-			\node at (\x, 0.2) {\tiny{DONE}};
-		\foreach \x in {2.25, 5.25, 8.25}
-			\node at (\x, 0.2) {\tiny{REVIEWED}};
-			
-		\node[overlay, inner sep = 0, draw, rotate=6] at (7.5, 5.75) {\includegraphics[width=1.75cm]{images/malte}};
-		
-	\end{tikzpicture}
-\end{center}
-\end{frame}
-
-%-----------------------------------------------------------------------------------
-
-\begin{frame}
     \frametitle{Continuous Integration with Jenkins}
     
     \begin{figure}
@@ -221,6 +220,55 @@ Button MyPreviousBtn {
 \begin{center}
 \includegraphics[width=1\textwidth] {images/test-trend-chart-md2-framework.png}
 \end{center}
+\end{frame}
+
+%-----------------------------------------------------------------------------------
+
+\begin{frame}[fragile]
+\frametitle{Testing the validator of a WS call}
+
+\begin{lstlisting}
+externalWebService sendEmail { 
+	url "http://psmd2.uni-muenster.de:8080/SendMail/api/mail/send/" 
+	method GET 
+	queryparams ( 
+	"to" : "andreas.fuchs@uni-muenster.de" 
+	"subject" : "The Subject" 
+	"body" : "Hello Andreas, this is the message for you."
+	)
+	bodyparams(
+		"test" : "test"
+	)
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Testing the validator of a WS call}
+
+\codeheading{Test implementation}
+\begin{lstlisting}
+@Test
+def noBodyParamsAllowedWhenGETMethodTest(){
+    ws_call_validator_model.assertError(
+        MD2Package::eINSTANCE.webServiceCall,
+        ControllerValidator::NOBODYPARAMSWHENGET);
+}
+\end{lstlisting}
+
+\vfill
+
+\codeheading{Validator implementation}
+\begin{lstlisting}
+@Check
+def checkNoBodyParamsWhenGETMethod(WebServiceCall wscall){
+    if(wscall.method.equals(RESTMethod.GET) 
+       && wscall.bodyparams.size > 0) {
+        acceptError("...");
+    }
+}
+\end{lstlisting}
+
 \end{frame}
 
 %-----------------------------------------------------------------------------------
