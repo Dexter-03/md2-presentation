@@ -1,17 +1,17 @@
 % !TEX root = ../beamer.tex
 
 \begin{frame}
-\frametitle{New Features Overview}
+\frametitle{Overview: New Features}
 
 \begin{itemize}
-\item Workflow specification with modular workflow elements
-\item Workflow specification across apps
-\item Terminate workflow
-\item Reuse of view elements in different workflow elements
-\item Calculate location coordinates from an address
-\item Call external Webservices
-\item Start workflow from external Systems via WS
-\item Upload image
+	\item Workflow specification with modular workflow elements
+	\item Workflow specification across apps
+	\item Termination of workflows
+	\item Reuse of view elements in different workflow elements
+	\item Calculation of location coordinates from an address
+	\item Image upload
+	\item Calling external webservices
+	\item Starting workflows from external systems via WS
 \end{itemize}
 \end{frame}
 
@@ -79,10 +79,9 @@
 		}
 	    \end{tikzpicture}
     \end{center}
-	\hfill\quelle{Source: \MD Project Seminar Presentation}
 \end{frame}
-
-\begin{frame}[fragile, plain]
+%-----------------------------------------------------------------------------------
+\begin{frame}[fragile, plain, label=wfspecification]
 	\plainnumber
 	\frametitle{Workflow Specification}
 	
@@ -112,27 +111,28 @@ WorkflowElement ReviewComplaint
 \end{minipage}
 
 \end{frame}
-
+%-----------------------------------------------------------------------------------
 \begin{frame}[fragile]
- \frametitle{Workflow Specification, Controller Layer}
+ \frametitle{Workflow Specification (Controller Layer)}
  
 \begin{lstlisting}[basicstyle=\footnotesize\ttfamily]
-WorkflowElement LocationDetection{
+WorkflowElement LocationDetection {
     defaultProcessChain LocationProcessChain
     onInit {
         init,
         ...
     }	
-    action CustomAction init{
+    action CustomAction init {
         bind action FireEvent(LocationEvent) on LocationVerifyView.Next.onClick
         bind action FireEvent(WithoutPhotoEvent) on LocationVerifyView.SkipUpload.onClick
     }
-    processChain LocationProcessChain{...}
+    processChain LocationProcessChain {...}
     ...
 }
 \end{lstlisting}
 \end{frame}
-
+%-----------------------------------------------------------------------------------
+\againframe<2>[plain]{wfspecification}
 %-----------------------------------------------------------------------------------
 
 \begin{frame}[fragile, plain]
