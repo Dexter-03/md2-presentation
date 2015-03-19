@@ -229,16 +229,16 @@ Button MyPreviousBtn {
 
 \begin{lstlisting}
 externalWebService sendEmail { 
-	url "http://psmd2.uni-muenster.de:8080/SendMail/api/mail/send/" 
-	method GET 
-	queryparams ( 
-	"to" : "andreas.fuchs@uni-muenster.de" 
-	"subject" : "The Subject" 
-	"body" : "Hello Andreas, this is the message for you."
-	)
-	bodyparams(
-		"test" : "test"
-	)
+  url "http://psmd2.uni-muenster.de:8080/SendMail/api/mail/send/" 
+  method GET 
+  queryparams ( 
+    "to" : "andreas.fuchs@uni-muenster.de" 
+    "subject" : "The Subject" 
+    "body" : "Hello Andreas, this is the message for you."
+  )
+  bodyparams(
+    "test" : "test"
+  )
 }
 \end{lstlisting}
 \end{frame}
