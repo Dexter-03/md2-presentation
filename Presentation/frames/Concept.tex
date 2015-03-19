@@ -91,7 +91,7 @@
 \begin{lstlisting}
 WorkflowElement LocationDetection
   fires LocationEvent {
-    start Mediacapturing
+    start MediaCapturing
   }
   fires WithoutPhotoEvent {
     start ReviewComplaint
@@ -261,7 +261,7 @@ App AdministrationApp {
 			\node[light, below = 0cm of md2model.south west, anchor = north west, minimum width = 2.5cm] (model) {Model};
 			\node[light, minimum width = 2.5cm, right = 0cm of model] (view) {View};
 			\node[light, new, right = 0cm of view, minimum width = 2.5cm] (controller) {Controller};
-			\node[light, new, right = 0cm of controller, minimum width = 2.5cm] {Workflow};
+			\node[light, fill=pantone315!20!white, right = 0cm of controller, minimum width = 2.5cm] {Workflow};
 			
 			\node[bigbox, new, below = of model.south west, anchor=north west] (preprocessing) {Preprocessing};			
 			\draw[->] (view.south east) -- (preprocessing);
