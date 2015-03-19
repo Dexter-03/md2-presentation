@@ -201,40 +201,6 @@ Button MyPreviousBtn {
 
 %-----------------------------------------------------------------------------------
 
-\begin{frame}
-    \frametitle{Continuous Integration with Jenkins}
-    
-    \begin{figure}
-    	\includegraphics[width= 0.9\linewidth]{images/jenkins-jobs.png}
-    \end{figure}
-    
-    \vspace{-1ex}
-    
-    \begin{itemize}
-       \item \texttt{de.wwu.md2.framework}
-       \begin{itemize}
-           \item builds every time the \texttt{mapapps} branch is updated
-       \end{itemize}
-       \item \texttt{de.wwu.md2.framework-Pull-Requests} 
-       \begin{itemize}
-           \item builds for each pull request
-           \item merged with current \texttt{mapapps} branch
-       \end{itemize}
-    \end{itemize}
-\end{frame}
-
-%-----------------------------------------------------------------------------------
-
-\begin{frame}[plain]
-\frametitle{Test Trend Chart: \texttt{mapapps} branch}
-\plainnumber
-\begin{center}
-\includegraphics[width=1\textwidth] {images/test-trend-chart-md2-framework.png}
-\end{center}
-\end{frame}
-
-%-----------------------------------------------------------------------------------
-
 \begin{frame}[fragile]
 \frametitle{Testing the validator of a WS call}
 
@@ -280,6 +246,40 @@ def checkNoBodyParamsWhenGETMethod(WebServiceCall wscall){
 }
 \end{lstlisting}
 
+\end{frame}
+
+%-----------------------------------------------------------------------------------
+
+\begin{frame}
+    \frametitle{Continuous Integration with Jenkins}
+    
+    \begin{figure}
+    	\includegraphics[width= 0.9\linewidth]{images/jenkins-jobs.png}
+    \end{figure}
+    
+    \vspace{-1ex}
+    
+    \begin{itemize}
+       \item \texttt{de.wwu.md2.framework}
+       \begin{itemize}
+           \item builds every time the \texttt{mapapps} branch is updated
+       \end{itemize}
+       \item \texttt{de.wwu.md2.framework-Pull-Requests} 
+       \begin{itemize}
+           \item builds for each pull request
+           \item merged with current \texttt{mapapps} branch
+       \end{itemize}
+    \end{itemize}
+\end{frame}
+
+%-----------------------------------------------------------------------------------
+
+\begin{frame}[plain]
+\frametitle{Test Trend Chart: \texttt{mapapps} branch}
+\plainnumber
+\begin{center}
+\includegraphics[width=1\textwidth] {images/test-trend-chart-md2-framework.png}
+\end{center}
 \end{frame}
 
 %-----------------------------------------------------------------------------------
