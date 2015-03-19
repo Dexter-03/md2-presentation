@@ -433,7 +433,7 @@ map MediaCapturingView.imageoutput to :ComplaintProvider.picture
 		\node[box, right = 2cm of mapapps, fill=pantone369!20!white, draw=pantone369] (be) {Backend\vphantom{Aq}};
 		\node[box, right = 2cm of be, fill=pantone315!20!white, draw=pantone315, align=center] (ws) {External\\Webservice\vphantom{Aq}};
 		\draw[thick, transform canvas = {yshift=0.25cm}, ->] (mapapps) -- node[above] {\footnotesize\texttt{JSON data\vphantom{Aq}}} (be);
-		\draw[thick, transform canvas = {yshift=-0.25cm}, <-] (mapapps) -- node[below] {\footnotesize\texttt{{\color{pantone390!80!black}200}/\alert{404}\vphantom{Aq}}} (be);
+		\draw[thick, transform canvas = {yshift=-0.25cm}, <-] (mapapps) -- node[below] {\footnotesize\texttt{{\color{pantone390!80!black}200}/\alert{502}\vphantom{Aq}}} (be);
 		\draw[thick, transform canvas = {yshift=0.25cm}, ->] (be) -- node[above] {\footnotesize\texttt{request\vphantom{Aq}}} (ws);
 		\draw[thick, transform canvas = {yshift=-0.25cm}, <-] (be) -- node[below] {\footnotesize\texttt{response\vphantom{Aq}}} (ws);
 	\end{tikzpicture}
