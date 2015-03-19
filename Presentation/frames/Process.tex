@@ -241,7 +241,7 @@ def noBodyParamsAllowedWhenGETMethodTest(){
 def checkNoBodyParamsWhenGETMethod(WebServiceCall wscall){
     if(wscall.method.equals(RESTMethod.GET) 
        && wscall.bodyparams.size > 0) {
-        acceptError("...");
+        acceptError("..."); // NOBODYPARAMSWHENGET
     }
 }
 \end{lstlisting}
