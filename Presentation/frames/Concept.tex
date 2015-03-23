@@ -131,7 +131,7 @@ WorkflowElement LocationDetection {
 \end{lstlisting}
 \end{frame}
 %-----------------------------------------------------------------------------------
-\againframe<2>[plain]{wfspecification}
+\againframe<2|handout:0>[plain]{wfspecification}
 %-----------------------------------------------------------------------------------
 
 \begin{frame}[fragile, plain]
@@ -204,7 +204,7 @@ App AdministrationApp {
 		}
 		\draw[->, thick, visible=<7->] ($(looi.east) + (0, 0.1) $) -| node[right] {\scriptsize{\texttt{appID}}} ($(be.north) + (0.1, 0)$);
 		\draw[<-, thick, visible=<8->] ($(looi.east) + (0, -0.1) $) -| node[below left] {\scriptsize{\texttt{open issues}}} ($(be.north) + (-0.1, 0)$);
-		\visible<9>{
+		\visible<9|handout:0>{
 			\node[overlay, align=center,right = 0.5cm of looi, rectangle callout, drop shadow, fill=white, draw, minimum width = 2.5cm, minimum height = 1.5cm, callout absolute pointer = {(looi)}] (popup) {
 				\begin{tikzpicture}
 				{\tikzset{wtf/.style = {rectangle, draw=none, fill=none, minimum width = 0cm, minimum height = 0cm }}
@@ -380,7 +380,7 @@ action Location (
 
 %-----------------------------------------------------------------------------------
 
-\begin{frame}[plain]
+\begin{frame}<handout:0>[plain]
 \frametitle{Upload Images}
 \begin{center}
 	\begin{tikzpicture}
