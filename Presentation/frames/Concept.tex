@@ -31,7 +31,7 @@
 		node distance = 0.2cm
 		]
 		{\small
-			\node[bigbox] (md2model) {\MD Model};
+			\node[bigbox] (md2model) {\MD model};
 			\node[light, below = 0cm of md2model.south west, anchor = north west, minimum width = 2.5cm] (model) {Model};
 			\node[light, minimum width = 2.5cm, right = 0cm of model] (view) {View};
 			\node[light, right = 0cm of view, minimum width = 2.5cm] (controller) {Controller};
@@ -40,7 +40,7 @@
 			\node[bigbox, below = of model.south west, anchor=north west] (preprocessing) {Preprocessing};			
 			\draw[->] (view.south east) -- (preprocessing);
 		    
-			\node[bigbox, below = of preprocessing] (completed) {Completed \MD Model};
+			\node[bigbox, below = of preprocessing] (completed) {Completed \MD model};
 			\draw[->] (preprocessing) -- (completed);
 			
 			\node[smallbox, unused, below = of completed.south west, anchor = north west] (android) {Android\vphantom{Aq}};
@@ -257,7 +257,7 @@ App AdministrationApp {
 		node distance = 0.2cm
 		]
 		{\small
-			\node[bigbox] (md2model) {\MD Model};
+			\node[bigbox] (md2model) {\MD model};
 			\node[light, below = 0cm of md2model.south west, anchor = north west, minimum width = 2.5cm] (model) {Model};
 			\node[light, minimum width = 2.5cm, right = 0cm of model] (view) {View};
 			\node[light, new, right = 0cm of view, minimum width = 2.5cm] (controller) {Controller};
@@ -266,7 +266,7 @@ App AdministrationApp {
 			\node[bigbox, new, below = of model.south west, anchor=north west] (preprocessing) {Preprocessing};			
 			\draw[->] (view.south east) -- (preprocessing);
 		    
-			\node[bigbox, new, below = of preprocessing] (completed) {Completed \MD Model};
+			\node[bigbox, new, below = of preprocessing] (completed) {Completed \MD model};
 			\draw[->] (preprocessing) -- (completed);
 			
 			\node[smallbox, unused, below = of completed.south west, anchor = north west] (android) {Android\vphantom{Aq}};
@@ -335,7 +335,7 @@ App AdministrationApp {
 		\draw[<->, thick] ($ (wfEventHandler1.east) + (0.1, 0) $) -- ++(0.8,0);
 		\draw[<->, thick] ($ (wfEventHandler2.east) + (0.1, 0) $) -- ++(0.8,0);
 		
-		\node[box2, right = 1cm of wfe2.north east, anchor=north west, fill=pantone315!10!white]  (gb1) {List of open issues};
+		\node[box2, right = 1cm of wfe2.north east, anchor=north west, fill=pantone315!10!white]  (gb1) {List of Open Issues};
 		\node[box2, below = of gb1, fill=pantone315!10!white] (gb2) {Runtime};
 		\node[box2, below = of gb2, fill=pantone315!10!white] (gb3) {Location Service};
 		\node[box2, below = of gb3, fill=pantone315!10!white] (gb4) {Workflow Store};
